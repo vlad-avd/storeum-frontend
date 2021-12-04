@@ -21,9 +21,10 @@ class AuthService {
     }
 
     async logout(userId) {
+        const response = $api.post(`${AUTH_URL}/logout`, {userId})
         localStorage.removeItem('access-token');
         localStorage.removeItem('user');
-        return $api.post(`${AUTH_URL}/logout`, {userId})
+        return Promise.resolve(response)
     }
 }
 

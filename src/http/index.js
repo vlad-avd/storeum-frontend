@@ -2,7 +2,7 @@ import {AUTH_URL} from "../services/AuthService";
 
 const axios = require("axios");
 
-export const API_URL = `http://localhost:8080/api`
+export const API_URL = 'http://localhost:8080/api/v1'
 
 const $api = axios.create({
     // withCredentials: true,
