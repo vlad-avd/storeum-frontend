@@ -1,6 +1,5 @@
-import Home from "../components/Home";
-import Register from "../components/RegistrationForm";
-import UserProfile from "../components/UserProfile";
+import Home from "../pages/Home";
+import UserProfile from "../components/UserProfile/UserProfile";
 import Login from "../pages/Login";
 import {DEFAULT, HOME, LOGIN, PROFILE, REGISTER} from "./routes";
 import Registration from "../pages/Registration";

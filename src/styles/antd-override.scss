@@ -1,0 +1,15 @@
+.ant-tree-title {
+  display: block !important;
+}
+
+.ant-tree-iconEle {
+  float: left;
+}
+
+.ant-tree.ant-tree-directory .ant-tree-treenode-selected:hover::before, .ant-tree.ant-tree-directory .ant-tree-treenode-selected::before {
+  opacity: 50%;
+}
+
+.ant-tree  .ant-tree-node-content-wrapper{
+  padding: 0;
+}

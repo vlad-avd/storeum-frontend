@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles/App.css";
 import AppRouter from "./components/AppRouter";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 import {Layout} from "antd";
 
 const App = () => {

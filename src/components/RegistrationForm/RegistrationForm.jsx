@@ -2,11 +2,12 @@ import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 
 import {Button, Divider, Form, Input} from "antd";
-import {registerAction} from "../redux/actions/auth";
+import {registerAction} from "../../redux/actions/auth";
 import Title from "antd/es/typography/Title";
 import {GoogleOutlined} from "@ant-design/icons";
 import {useHistory} from "react-router-dom";
-import {LOGIN} from "../routes/routes";
+import {LOGIN} from "../../routes/routes";
+import "./RegistrationForm.css"
 
 const Register = () => {
 
@@ -38,7 +39,10 @@ const Register = () => {
 
     return (
         <Form onFinish={handleRegister}>
-            <Title level={3}>Create account</Title>
+            <Title level={3}>
+                Create account
+            </Title>
+
             <Form.Item
                 labelCol={{span: 24}}
                 wrapperCol={{span: 24}}
@@ -48,7 +52,8 @@ const Register = () => {
             >
                 <Input
                     onChange={onChangeUsername}
-                    style={{borderRadius: 10}} />
+                    className="input-field"
+                />
             </Form.Item>
 
             <Form.Item
@@ -60,7 +65,8 @@ const Register = () => {
             >
                 <Input
                     onChange={onChangeUsername}
-                    style={{borderRadius: 10}} />
+                    className="input-field"
+                />
             </Form.Item>
 
             <Form.Item
@@ -72,7 +78,8 @@ const Register = () => {
             >
                 <Input.Password
                     onChange={onChangePassword}
-                    style={{borderRadius: 10}}  />
+                    className="input-field"
+                />
             </Form.Item>
 
             <Form.Item >
@@ -80,14 +87,14 @@ const Register = () => {
                     block
                     type="primary"
                     htmlType="submit"
-                    style={{borderRadius: 10, border: "none", backgroundColor: "#72DD96"}}
+                    className="main-button"
                 >
                     Create account
                 </Button>
             </Form.Item>
 
             <Form.Item>
-                <Divider style={{height: 20}} plain>or</Divider>
+                <Divider className="form-divider" plain>or</Divider>
             </Form.Item>
 
             <Form.Item>
@@ -95,8 +102,8 @@ const Register = () => {
                     block
                     type="primary"
                     htmlType="submit"
-                    style={{borderRadius: 10, borderColor: "#C4C4C4", backgroundColor: "white", color: "black"}}
-                    icon={<GoogleOutlined style={{ fontSize: '16px', color: "black" }} />}
+                    className="google-button"
+                    icon={<GoogleOutlined className="google-icon" />}
                 >
                     Continue with Google
                 </Button>

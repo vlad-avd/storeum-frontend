@@ -2,8 +2,9 @@ import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import "antd/dist/antd.css";
 import {Button, Divider, Form, Input} from "antd";
-import {loginAction} from "../redux/actions/auth";
+import {loginAction} from "../../redux/actions/auth";
 import Title from "antd/es/typography/Title";
+import "./LoginForm.css"
 import {GoogleOutlined} from "@ant-design/icons";
 
 const LoginForm = () => {
@@ -29,7 +30,10 @@ const LoginForm = () => {
 
     return (
         <Form onFinish={handleLogin}>
-            <Title level={3}>Login</Title>
+            <Title level={3}>
+                Login
+            </Title>
+
             <Form.Item
                 labelCol={{span: 24}}
                 wrapperCol={{span: 24}}
@@ -39,7 +43,8 @@ const LoginForm = () => {
             >
                 <Input
                     onChange={onChangeUsername}
-                    style={{borderRadius: 10}} />
+                    className="input-field"
+                />
             </Form.Item>
 
             <Form.Item
@@ -51,7 +56,8 @@ const LoginForm = () => {
             >
                 <Input.Password
                     onChange={onChangePassword}
-                    style={{borderRadius: 10}}  />
+                    className="input-field"
+                />
             </Form.Item>
 
             <Form.Item >
@@ -59,14 +65,17 @@ const LoginForm = () => {
                     block
                     type="primary"
                     htmlType="submit"
-                    style={{borderRadius: 10, border: "none", backgroundColor: "#72DD96"}}
+                    className="main-button"
                 >
                     Login
                 </Button>
+
             </Form.Item>
 
             <Form.Item>
-                <Divider style={{height: 20}} plain>or</Divider>
+                <Divider className="form-divider" plain>
+                    or
+                </Divider>
             </Form.Item>
 
             <Form.Item>
@@ -74,8 +83,8 @@ const LoginForm = () => {
                     block
                     type="primary"
                     htmlType="submit"
-                    style={{borderRadius: 10, borderColor: "#C4C4C4", backgroundColor: "white", color: "black"}}
-                    icon={<GoogleOutlined style={{ fontSize: '16px', color: "black" }} />}
+                    className="google-button"
+                    icon={<GoogleOutlined className="google-icon" />}
                 >
                     Continue with Google
                 </Button>

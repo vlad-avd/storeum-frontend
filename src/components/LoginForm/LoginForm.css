@@ -1,0 +1,25 @@
+.input-field {
+    border-radius: 10px;
+}
+
+.main-button {
+    border-radius: 10px;
+    border: none;
+    background-color: #72DD96;
+}
+
+.form-divider {
+    height: 20px;
+}
+
+.google-button {
+    border-radius: 10px;
+    border-color: #C4C4C4;
+    background-color: white;
+    color: black;
+}
+
+.google-icon {
+    font-size: 16px;
+    color: black;
+}

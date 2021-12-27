@@ -1,0 +1,11 @@
+.hide {
+    display: none;
+}
+
+.hide:hover{
+    background-color: rgba(236, 236, 236, 0.6);
+}
+
+.title:hover .hide {
+    display: block;
+}

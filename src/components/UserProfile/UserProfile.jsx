@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {useSelector} from "react-redux";
-import UserService from "../services/UserService";
+import UserService from "../../services/UserService";
 
 const UserProfile = () => {
     const {user} = useSelector((state) => state.auth);

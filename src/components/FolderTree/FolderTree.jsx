@@ -1,9 +1,9 @@
 import React from 'react';
 import {Button, Layout, Tree} from "antd";
-import {DownOutlined, EllipsisOutlined} from "@ant-design/icons";
-import TreeElement from "./TreeElement";
+import TreeElement from "../TreeElement/TreeElement";
 
 const TreeNode = Tree.TreeNode;
+const {DirectoryTree} = Tree;
 
 const FolderTree = ({folders}) => {
 
@@ -12,10 +12,11 @@ const FolderTree = ({folders}) => {
         return data.map(folder => {
             if (folder.subFolders) {
                 return (
-                    <TreeNode title={<TreeElement title={folder.title} />} key={folder.id}>
+                    <TreeNode
+                        title={<TreeElement title={folder.title} />}
+                        key={folder.id}
+                    >
                         {renderTreeNodes(folder.subFolders)}
-                        {/*TODO*/}
-                        {/*{[...renderTreeNodes(folder.subFolders), <TreeNode title="Add new" />]}*/}
                     </TreeNode>
                 );
             }
@@ -25,12 +26,13 @@ const FolderTree = ({folders}) => {
 
     return (
         <Layout>
-            <Tree switcherIcon={<DownOutlined />}>
+            <DirectoryTree>
                 {renderTreeNodes(folders)}
-            </Tree>
+            </DirectoryTree>
             <Button
+                /*TODO: add folder styles*/
+                className="add-folder"
                 block
-                type="text"
                 htmlType="submit"
                 size={"small"}
             >
