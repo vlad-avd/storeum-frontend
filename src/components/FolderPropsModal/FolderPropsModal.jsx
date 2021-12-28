@@ -1,13 +1,45 @@
-import React, {useContext, useState} from 'react';
+import React from 'react';
+import {Button, Modal} from "antd";
+import '../../styles/antd-override.scss'
 
-const FolderPropsModal = () => {
-
-    const [isVisible, setIsVisible] = useState(false);
-
+const FolderPropsModal = ({isVisible, handleClose}) => {
     return (
-        <div>
-
-        </div>
+        <Modal
+            width={"200px"}
+            visible={isVisible}
+            footer={null}
+            closable={false}
+            onCancel={handleClose}
+        >
+            <Button
+                block
+                htmlType="submit"
+                size={"small"}
+            >
+                Rename
+            </Button>
+            <Button
+                block
+                htmlType="submit"
+                size={"small"}
+            >
+                Delete
+            </Button>
+            <Button
+                block
+                htmlType="submit"
+                size={"small"}
+            >
+                Move
+            </Button>
+            <Button
+                block
+                htmlType="submit"
+                size={"small"}
+            >
+                Add folder
+            </Button>
+        </Modal>
     );
 };
 

@@ -6,7 +6,6 @@ const TreeNode = Tree.TreeNode;
 const {DirectoryTree} = Tree;
 
 const FolderTree = ({folders}) => {
-
     const renderTreeNodes = (data) => {
         if(!data) return [];
         return data.map(folder => {

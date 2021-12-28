@@ -1,18 +1,39 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {EllipsisOutlined} from "@ant-design/icons";
 import {Button} from "antd";
 import './TreeElement.css'
 import '../../styles/antd-override.scss'
+import FolderPropsModal from "../FolderPropsModal/FolderPropsModal";
 
 const TreeElement = ({title}) => {
 
+    const [isFolderPropsModalVisible, setIsFolderPropsModalVisible] = useState(false);
+
     const openProperties = e => {
         e.stopPropagation();
+        setIsFolderPropsModalVisible(true);
     }
 
+    const handleCloseProperties = (e) => {
+        e.stopPropagation();
+        setIsFolderPropsModalVisible(false);
+    }
+
+    const handleOpenedModal = (e) => {
+        if (isFolderPropsModalVisible) {
+            e.stopPropagation();
+        }
+    }
 
     return (
-        <span className="title" style={{display: "block"}}>
+        <span
+            onClick={handleOpenedModal}
+            className="title"
+            style={{display: "block"}}
+        >
+            <FolderPropsModal
+                isVisible={isFolderPropsModalVisible} handleClose={handleCloseProperties}
+            />
             {title}
             <Button
                 onClick={openProperties}
@@ -22,10 +43,10 @@ const TreeElement = ({title}) => {
                 htmlType="submit"
                 size={"small"}
                 style={{float: "right", textShadow: "none", verticalAlign: "middle", border: "none"}}
-                icon={<EllipsisOutlined style={{verticalAlign: "middle"}} />}
+                icon={<EllipsisOutlined style={{verticalAlign: "middle"}}/>}
             />
         </span>
     );
-};
+}
 
 export default TreeElement;
