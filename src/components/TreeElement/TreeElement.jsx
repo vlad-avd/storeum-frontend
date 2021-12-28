@@ -5,7 +5,7 @@ import './TreeElement.css'
 import '../../styles/antd-override.scss'
 import FolderPropsModal from "../FolderPropsModal/FolderPropsModal";
 
-const TreeElement = ({title}) => {
+const TreeElement = ({folder}) => {
 
     const [isFolderPropsModalVisible, setIsFolderPropsModalVisible] = useState(false);
 
@@ -14,8 +14,7 @@ const TreeElement = ({title}) => {
         setIsFolderPropsModalVisible(true);
     }
 
-    const handleCloseProperties = (e) => {
-        e.stopPropagation();
+    const handleCloseProperties = () => {
         setIsFolderPropsModalVisible(false);
     }
 
@@ -32,9 +31,11 @@ const TreeElement = ({title}) => {
             style={{display: "block"}}
         >
             <FolderPropsModal
-                isVisible={isFolderPropsModalVisible} handleClose={handleCloseProperties}
+                isVisible={isFolderPropsModalVisible}
+                handleClose={handleCloseProperties}
+                folder={folder}
             />
-            {title}
+            {folder.title}
             <Button
                 onClick={openProperties}
                 className="hide"

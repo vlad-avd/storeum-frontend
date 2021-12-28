@@ -1,8 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, Modal} from "antd";
 import '../../styles/antd-override.scss'
+import AddFolderModal from "../AddFolderModal/AddFolderModal";
 
-const FolderPropsModal = ({isVisible, handleClose}) => {
+const FolderPropsModal = ({isVisible, handleClose, folder}) => {
+
+    const [isAddFolderModalVisible, setIsAddFolderModalVisible] = useState(false);
+
+    const handleAddFolder = () => {
+        setIsAddFolderModalVisible(true);
+    }
+
+    const closeAddFolderModal = async () => {
+        setIsAddFolderModalVisible(false)
+        //TODO: to close child modal then parent
+        await new Promise(it => setTimeout(it, 0));
+        handleClose();
+    }
+
     return (
         <Modal
             width={"200px"}
@@ -32,7 +47,13 @@ const FolderPropsModal = ({isVisible, handleClose}) => {
             >
                 Move
             </Button>
+            {isVisible && <AddFolderModal
+                isVisible={isAddFolderModalVisible}
+                handleClose={closeAddFolderModal}
+                parentFolderId={folder.id}
+            />}
             <Button
+                onClick={handleAddFolder}
                 block
                 htmlType="submit"
                 size={"small"}

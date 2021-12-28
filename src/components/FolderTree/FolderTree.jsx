@@ -12,7 +12,7 @@ const FolderTree = ({folders}) => {
             if (folder.subFolders) {
                 return (
                     <TreeNode
-                        title={<TreeElement title={folder.title} />}
+                        title={<TreeElement folder={folder} />}
                         key={folder.id}
                     >
                         {renderTreeNodes(folder.subFolders)}
