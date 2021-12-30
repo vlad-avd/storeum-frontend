@@ -1,4 +1,5 @@
 import {AUTH_URL} from "../services/AuthService";
+import {logoutAction} from "../redux/actions/auth";
 
 const axios = require("axios");
 
@@ -30,6 +31,9 @@ $api.interceptors.response.use((config) => {
             return $api.request(originalRequest);
         } catch (e) {
             console.log('Unauthorized')
+            localStorage.removeItem('access-token');
+            localStorage.removeItem('refresh-token');
+            localStorage.removeItem('user');
         }
     }
     throw error;

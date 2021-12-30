@@ -10,7 +10,7 @@ class FolderService {
 
     async createFolder(userId, parentFolderId, title) {
         return $api.post(`/users/${userId}/folders`,
-            {userId, parentFolderId, title})
+            {parentFolderId, title})
             .then((response) => {
             return response.data;
         })

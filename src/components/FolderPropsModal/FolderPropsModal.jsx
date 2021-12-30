@@ -47,11 +47,11 @@ const FolderPropsModal = ({isVisible, handleClose, folder}) => {
             >
                 Move
             </Button>
-            {isVisible && <AddFolderModal
+            <AddFolderModal
                 isVisible={isAddFolderModalVisible}
                 handleClose={closeAddFolderModal}
                 parentFolderId={folder.id}
-            />}
+            />
             <Button
                 onClick={handleAddFolder}
                 block

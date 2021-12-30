@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {Form, Input, Modal} from "antd";
-import FolderService from "../../services/FolderService";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {addFolderAction} from "../../redux/actions/folders";
 
 const AddFolderModal = ({isVisible, handleClose, parentFolderId}) => {
 
+    const dispatch = useDispatch();
     const [folderTitle, setFolderTitle] = useState("");
-
     const {user} = useSelector(state => state.auth)
 
     const onChangeFolderTitle = (e) => {
@@ -15,8 +15,7 @@ const AddFolderModal = ({isVisible, handleClose, parentFolderId}) => {
     }
 
     const handleFolderCreation = () => {
-        //TODO: add folders to app state
-        const data = FolderService.createFolder(user.id, parentFolderId, folderTitle)
+        dispatch(addFolderAction(user.id, parentFolderId, folderTitle))
         handleClose();
     }
 
