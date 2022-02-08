@@ -64,7 +64,7 @@ const Register = () => {
                 rules={[{ required: true, message: 'Please input your email!' }]}
             >
                 <Input
-                    onChange={onChangeUsername}
+                    onChange={onChangeEmail}
                     className="input-field"
                 />
             </Form.Item>

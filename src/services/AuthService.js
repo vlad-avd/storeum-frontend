@@ -1,14 +1,15 @@
-import $api from "../http";
+import axios from "axios";
+import $api, {API_URL} from "../http";
 
 export const AUTH_URL = '/auth'
 
 class AuthService {
 
-    async login(username, password) {
-        return $api.post(`${AUTH_URL}/login`, {username, password})
+    login(username, password) {
+        return axios.post(`${API_URL + AUTH_URL}/login`, {username, password})
             .then((response) => {
                 if (response.data.accessToken) {
-                    localStorage.setItem('user', JSON.stringify(response.data));
+                    localStorage.setItem('user', JSON.stringify({id: response.data.id, username: response.data.username}));
                     localStorage.setItem('access-token', response.data.accessToken)
                     localStorage.setItem('refresh-token', response.data.refreshToken)
                 }
@@ -16,15 +17,21 @@ class AuthService {
             });
     }
 
-    async register(username, email, password) {
-        return $api.post(`${AUTH_URL}/register`, {username, email, password})
+    register(username, email, password) {
+        return axios.post(`${API_URL + AUTH_URL}/register`, {username, email, password})
+            .then((response) => {
+                return response.data;
+            })
     }
 
-    async logout(userId) {
-        const response = $api.post(`${AUTH_URL}/logout`, {userId})
-        localStorage.removeItem('access-token');
-        localStorage.removeItem('user');
-        return Promise.resolve(response)
+    logout(userId) {
+        return $api.post(`${AUTH_URL}/logout`, {userId})
+            .then((response) => {
+                localStorage.removeItem('access-token');
+                localStorage.removeItem('refresh-token');
+                localStorage.removeItem('user');
+                return response.data;
+            })
     }
 }
 

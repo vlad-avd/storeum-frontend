@@ -1,7 +1,7 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {logoutAction} from "../../redux/actions/auth";
-import {Button, Col, Layout, Row} from "antd";
+import {Button, Col, Layout, Row, Space} from "antd";
 import {useHistory, useLocation} from "react-router-dom";
 import {DEFAULT, PROFILE} from "../../routes/routes";
 import "./Navbar.css"
@@ -13,6 +13,7 @@ const Navbar = () => {
     const {user} = useSelector((state) => state.auth);
 
     let location = useLocation();
+    //TODO: create list of paths without navbar
     if (location.pathname.match('/login') || location.pathname.match('/register') || !user) {
         return null;
     }
@@ -35,17 +36,15 @@ const Navbar = () => {
                 </Col>
 
                 <Col span={12}>
-                    <Row justify="end" align="middle" gutter={[16, 16]}>
-                        <Col span={2}>
-                            <Button
-                                onClick={() => router.push(PROFILE)} type="link"
-                                className="nav-button"
-                            >
-                                {user.username}
-                            </Button>
-                        </Col>
+                    <Row justify="end">
+                        <Space>
+                                <Button
+                                    onClick={() => router.push(PROFILE)} type="link"
+                                    className="nav-button"
+                                >
+                                    {user.username}
+                                </Button>
 
-                        <Col span={2}>
                             <Button
                                 onClick={handleLogout}
                                 type="primary"
@@ -54,7 +53,7 @@ const Navbar = () => {
                             >
                                 Logout
                             </Button>
-                        </Col>
+                        </Space>
                     </Row>
                 </Col>
 

@@ -10,7 +10,7 @@ const Registration = () => {
 
     return (
         <Layout>
-            <Layout.Header style={{backgroundColor: "white"}}>
+            <Layout.Header style={{backgroundColor: "white", padding: "0 20px 0 50px"}}>
                 <Row>
                     <Col span={12}>
                         <Row justify="start">

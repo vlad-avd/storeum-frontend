@@ -2,20 +2,41 @@ import React, {useState} from 'react';
 import {Button, Modal} from "antd";
 import '../../styles/antd-override.scss'
 import AddFolderModal from "../AddFolderModal/AddFolderModal";
+import DeleteFolderModal from "../DeleteFolderModal/DeleteFolderModal";
 
-const FolderPropsModal = ({isVisible, handleClose, folder}) => {
+const FolderActionsModal = ({isVisible, handleClose, folder}) => {
 
     const [isAddFolderModalVisible, setIsAddFolderModalVisible] = useState(false);
+    const [isDeleteFolderModalVisible, setIsDeleteFolderModalVisible] = useState(false);
 
-    const handleAddFolder = () => {
+    const addFolder = () => {
         setIsAddFolderModalVisible(true);
     }
 
-    const closeAddFolderModal = async () => {
+    const deleteFolder = () => {
+        setIsDeleteFolderModalVisible(true);
+    }
+
+    const closeAddFolderModalWithParent = async () => {
         setIsAddFolderModalVisible(false)
         //TODO: to close child modal then parent
         await new Promise(it => setTimeout(it, 0));
         handleClose();
+    }
+
+    const closeAddFolderModal = (e) => {
+        setIsAddFolderModalVisible(false)
+    }
+
+    const closeDelFolderModalWithParent = async () => {
+        setIsDeleteFolderModalVisible(false)
+        //TODO: to close child modal then parent
+        await new Promise(it => setTimeout(it, 0));
+        handleClose();
+    }
+
+    const closeDelFolderModal = () => {
+        setIsDeleteFolderModalVisible(false)
     }
 
     return (
@@ -25,6 +46,7 @@ const FolderPropsModal = ({isVisible, handleClose, folder}) => {
             footer={null}
             closable={false}
             onCancel={handleClose}
+            destroyOnClose={true}
         >
             <Button
                 block
@@ -33,27 +55,28 @@ const FolderPropsModal = ({isVisible, handleClose, folder}) => {
             >
                 Rename
             </Button>
+            <DeleteFolderModal
+                isVisible={isDeleteFolderModalVisible}
+                handleClose={closeDelFolderModal}
+                handleCloseWithParent={closeDelFolderModalWithParent}
+                folderId={folder.id}
+            />
             <Button
+                onClick={deleteFolder}
                 block
                 htmlType="submit"
                 size={"small"}
             >
                 Delete
             </Button>
-            <Button
-                block
-                htmlType="submit"
-                size={"small"}
-            >
-                Move
-            </Button>
             <AddFolderModal
                 isVisible={isAddFolderModalVisible}
                 handleClose={closeAddFolderModal}
+                handleCloseWithParent={closeAddFolderModalWithParent}
                 parentFolderId={folder.id}
             />
             <Button
-                onClick={handleAddFolder}
+                onClick={addFolder}
                 block
                 htmlType="submit"
                 size={"small"}
@@ -64,4 +87,4 @@ const FolderPropsModal = ({isVisible, handleClose, folder}) => {
     );
 };
 
-export default FolderPropsModal;
+export default FolderActionsModal;

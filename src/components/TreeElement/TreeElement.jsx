@@ -3,41 +3,41 @@ import {EllipsisOutlined} from "@ant-design/icons";
 import {Button} from "antd";
 import './TreeElement.css'
 import '../../styles/antd-override.scss'
-import FolderPropsModal from "../FolderPropsModal/FolderPropsModal";
+import FolderActionsModal from "../FolderActionsModal/FolderActionsModal";
 
 const TreeElement = ({folder}) => {
 
-    const [isFolderPropsModalVisible, setIsFolderPropsModalVisible] = useState(false);
+    const [isFolderActionsModalVisible, setIsFolderActionsModalVisible] = useState(false);
 
-    const openProperties = e => {
+    const handleOpenActions = e => {
         e.stopPropagation();
-        setIsFolderPropsModalVisible(true);
+        setIsFolderActionsModalVisible(true);
     }
 
-    const handleCloseProperties = () => {
-        setIsFolderPropsModalVisible(false);
+    const handleCloseActions = () => {
+        setIsFolderActionsModalVisible(false);
     }
 
-    const handleOpenedModal = (e) => {
-        if (isFolderPropsModalVisible) {
+    const handleOpenModal = (e) => {
+        if (isFolderActionsModalVisible) {
             e.stopPropagation();
         }
     }
 
     return (
         <span
-            onClick={handleOpenedModal}
+            onClick={handleOpenModal}
             className="title"
             style={{display: "block"}}
         >
-            <FolderPropsModal
-                isVisible={isFolderPropsModalVisible}
-                handleClose={handleCloseProperties}
+            <FolderActionsModal
+                isVisible={isFolderActionsModalVisible}
+                handleClose={handleCloseActions}
                 folder={folder}
             />
             {folder.title}
             <Button
-                onClick={openProperties}
+                onClick={handleOpenActions}
                 className="hide"
                 block
                 type="text"

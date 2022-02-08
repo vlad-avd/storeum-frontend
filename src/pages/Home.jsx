@@ -12,20 +12,22 @@ const Home = () => {
     const {user} = useSelector(state => state.auth)
     const {folders} = useSelector(state => state.folders)
 
-    useEffect(async () => {
+    useEffect(() => {
         dispatch(getFoldersAction(user.id))
     }, [user.id])
 
     return (
-        <Layout style={{backgroundColor: "white", padding: "40px 0 0 0"}}>
+        <Layout style={{backgroundColor: "white", padding: "0px 0 0 0"}}>
+            <Divider style={{margin: 0}}/>
             <Content style={{ padding: '0 25px' }}>
                 <Row className={"h75"} justify="start">
                     <Col style={{paddingTop: "10px"}} span={4}>
                         <FolderTree folders={folders}/>
+
                     </Col>
-                    <Divider className={"h75"} type="vertical" />
-                    <Col span={19}>
-                        <Row justify="center">
+                    <Col span={20}>
+                        <Row justify="start">
+                            <Divider className={"h100"} type="vertical" />
                             Content
                         </Row>
                     </Col>

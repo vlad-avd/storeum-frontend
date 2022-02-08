@@ -3,7 +3,6 @@ import {Button, Layout, Tree} from "antd";
 import TreeElement from "../TreeElement/TreeElement";
 import AddFolderModal from "../AddFolderModal/AddFolderModal";
 
-const TreeNode = Tree.TreeNode;
 const {DirectoryTree} = Tree;
 
 const FolderTree = ({folders}) => {
@@ -14,32 +13,31 @@ const FolderTree = ({folders}) => {
         setIsAddFolderModalVisible(true);
     }
 
-    const closeAddFolderModal = async () => {
+    const closeAddFolderModal = () => {
         setIsAddFolderModalVisible(false)
     }
 
     const renderTreeNodes = (data) => {
         if(!data) return [];
         return data.map(folder => {
-            if (folder.subFolders) {
-                return (
-                    <TreeNode
-                        title={<TreeElement folder={folder} />}
-                        key={folder.id}
-                    >
-                        {renderTreeNodes(folder.subFolders)}
-                    </TreeNode>
-                );
+            if (folder.subFolders.length) {
+                return ({
+                        key: folder.id,
+                        title: <TreeElement folder={folder}/>,
+                        children: renderTreeNodes(folder.subFolders)})
             }
-            return (<TreeNode {...folder} />);
+            return ({
+                key: folder.id,
+                title: <TreeElement folder={folder}/>,
+                children: []})
         });
     }
 
     return (
         <Layout>
-            <DirectoryTree>
-                {renderTreeNodes(folders)}
-            </DirectoryTree>
+            <DirectoryTree
+                treeData={renderTreeNodes(folders)}
+            />
             <AddFolderModal
                 isVisible={isAddFolderModalVisible}
                 handleClose={closeAddFolderModal}

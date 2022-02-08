@@ -1,5 +1,4 @@
 import {AUTH_URL} from "../services/AuthService";
-import {logoutAction} from "../redux/actions/auth";
 
 const axios = require("axios");
 

@@ -3,7 +3,7 @@ import {Form, Input, Modal} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {addFolderAction} from "../../redux/actions/folders";
 
-const AddFolderModal = ({isVisible, handleClose, parentFolderId}) => {
+const AddFolderModal = ({isVisible, handleClose, handleCloseWithParent, parentFolderId}) => {
 
     const dispatch = useDispatch();
     const [folderTitle, setFolderTitle] = useState("");
@@ -19,15 +19,16 @@ const AddFolderModal = ({isVisible, handleClose, parentFolderId}) => {
         handleClose();
     }
 
-
     return (
         <Modal
+            className={"add-folder-modal"}
             okText="Create"
             okButtonProps={{form:'add-folder-form', htmlType: 'submit'}}
             width={"200px"}
             visible={isVisible}
             closable={false}
             onCancel={handleClose}
+            destroyOnClose={true}
         >
             <Form
                 id='add-folder-form'
