@@ -30,7 +30,7 @@ const Home = () => {
                         <Divider className={"h100"} type="vertical" />
                     </Col>
                     <Col span={19}>
-                        <Row justify="center" style={{width: "100%"}}>
+                        <Row justify="center" style={{width: "100%", margin: "25px 0"}}>
                                 <Notes notes={notes} />
                         </Row>
                     </Col>
