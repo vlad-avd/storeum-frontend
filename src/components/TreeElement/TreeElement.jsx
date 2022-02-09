@@ -6,29 +6,32 @@ import '../../styles/antd-override.scss'
 import FolderActionsModal from "../FolderActionsModal/FolderActionsModal";
 import {useDispatch, useSelector} from "react-redux";
 import {getNotesAction} from "../../redux/actions/notes";
+import {CLOSE_FOLDER_ACTIONS_MODAL, OPEN_FOLDER_ACTIONS_MODAL} from "../../redux/actions/types";
 
 const TreeElement = ({folder}) => {
 
     const dispatch = useDispatch();
     const {user} = useSelector(state => state.auth)
+    const {isOpened} = useSelector(state => state.folderActionsModal)
     const [isFolderActionsModalVisible, setIsFolderActionsModalVisible] = useState(false);
 
-    const handleOpenActions = e => {
-        e.stopPropagation();
-        setIsFolderActionsModalVisible(true);
-    }
-
-    const handleCloseActions = (e) => {
+    const handleOpenActions = (e) => {
         e.stopPropagation()
-        setIsFolderActionsModalVisible(false);
+        setIsFolderActionsModalVisible(true);
+        dispatch({type: OPEN_FOLDER_ACTIONS_MODAL});
     }
 
-    //TODO: add redux modal state and delete all other stop propagation
+    const handleCloseActions = () => {
+        setIsFolderActionsModalVisible(false);
+        dispatch({type: CLOSE_FOLDER_ACTIONS_MODAL});
+    }
+
     const handleFolderClick = (e) => {
-        if (isFolderActionsModalVisible) {
+        if (isOpened) {
             e.stopPropagation();
+        } else {
+            dispatch(getNotesAction(user.id, folder.id))
         }
-        dispatch(getNotesAction(user.id, folder.id))
     }
 
     return (
