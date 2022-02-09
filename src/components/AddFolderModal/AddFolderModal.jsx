@@ -14,9 +14,9 @@ const AddFolderModal = ({isVisible, handleClose, handleCloseWithParent, parentFo
         setFolderTitle(folderTitle);
     }
 
-    const handleFolderCreation = () => {
+    const handleFolderCreation = (e) => {
         dispatch(addFolderAction(user.id, parentFolderId, folderTitle))
-        handleClose();
+        handleClose(e);
     }
 
     return (
@@ -41,6 +41,7 @@ const AddFolderModal = ({isVisible, handleClose, handleCloseWithParent, parentFo
                     name="folder-title"
                 >
                     <Input
+                        onClick={event => event.stopPropagation()}
                         onChange={onChangeFolderTitle}
                         // className="input-field"
                     />

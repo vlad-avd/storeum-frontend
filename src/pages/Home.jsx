@@ -5,30 +5,33 @@ import '../styles/App.css'
 import {Content} from "antd/es/layout/layout";
 import FolderTree from "../components/FolderTree/FolderTree";
 import {getFoldersAction} from "../redux/actions/folders";
+import Notes from "../components/Notes/Notes";
 
 const Home = () => {
 
     const dispatch = useDispatch();
     const {user} = useSelector(state => state.auth)
     const {folders} = useSelector(state => state.folders)
+    const {notes} = useSelector(state => state.notes)
 
     useEffect(() => {
         dispatch(getFoldersAction(user.id))
     }, [user.id])
 
     return (
-        <Layout style={{backgroundColor: "white", padding: "0px 0 0 0"}}>
+        <Layout style={{backgroundColor: "white", padding: "0"}}>
             <Divider style={{margin: 0}}/>
             <Content style={{ padding: '0 25px' }}>
                 <Row className={"h75"} justify="start">
                     <Col style={{paddingTop: "10px"}} span={4}>
                         <FolderTree folders={folders}/>
-
                     </Col>
-                    <Col span={20}>
-                        <Row justify="start">
-                            <Divider className={"h100"} type="vertical" />
-                            Content
+                    <Col span={1}>
+                        <Divider className={"h100"} type="vertical" />
+                    </Col>
+                    <Col span={19}>
+                        <Row justify="center" style={{width: "100%"}}>
+                                <Notes notes={notes} />
                         </Row>
                     </Col>
                 </Row>

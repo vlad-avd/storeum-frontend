@@ -7,10 +7,10 @@ const DeleteFolderModal = ({isVisible, handleClose, handleCloseWithParent, folde
     const dispatch = useDispatch();
     const {user} = useSelector(state => state.auth)
 
-    const handleFolderDelete = () => {
+    const handleFolderDelete = (e) => {
         //TODO
         dispatch(deleteFolderAction(user.id, folderId))
-        handleCloseWithParent();
+        handleCloseWithParent(e);
     }
 
     return (
@@ -22,6 +22,7 @@ const DeleteFolderModal = ({isVisible, handleClose, handleCloseWithParent, folde
             onOk={handleFolderDelete}
             onCancel={handleClose}
             destroyOnClose={true}
+            mask={false}
         >
         </Modal>
     );

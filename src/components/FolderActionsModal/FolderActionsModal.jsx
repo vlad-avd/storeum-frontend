@@ -9,33 +9,39 @@ const FolderActionsModal = ({isVisible, handleClose, folder}) => {
     const [isAddFolderModalVisible, setIsAddFolderModalVisible] = useState(false);
     const [isDeleteFolderModalVisible, setIsDeleteFolderModalVisible] = useState(false);
 
-    const addFolder = () => {
+    const addFolder = (e) => {
+        e.stopPropagation()
         setIsAddFolderModalVisible(true);
     }
 
-    const deleteFolder = () => {
+    const deleteFolder = (e) => {
+        e.stopPropagation()
         setIsDeleteFolderModalVisible(true);
     }
 
-    const closeAddFolderModalWithParent = async () => {
+    const closeAddFolderModalWithParent = async (e) => {
+        e.stopPropagation()
         setIsAddFolderModalVisible(false)
         //TODO: to close child modal then parent
         await new Promise(it => setTimeout(it, 0));
-        handleClose();
+        handleClose(e);
     }
 
     const closeAddFolderModal = (e) => {
+        e.stopPropagation()
         setIsAddFolderModalVisible(false)
     }
 
-    const closeDelFolderModalWithParent = async () => {
+    const closeDelFolderModalWithParent = async (e) => {
+        e.stopPropagation()
         setIsDeleteFolderModalVisible(false)
         //TODO: to close child modal then parent
         await new Promise(it => setTimeout(it, 0));
-        handleClose();
+        handleClose(e);
     }
 
-    const closeDelFolderModal = () => {
+    const closeDelFolderModal = (e) => {
+        e.stopPropagation()
         setIsDeleteFolderModalVisible(false)
     }
 
