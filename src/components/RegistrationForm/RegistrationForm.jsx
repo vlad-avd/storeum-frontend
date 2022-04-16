@@ -6,7 +6,7 @@ import {registerAction} from "../../redux/actions/auth";
 import Title from "antd/es/typography/Title";
 import {GoogleOutlined} from "@ant-design/icons";
 import {useHistory} from "react-router-dom";
-import {MESSAGE} from "../../routes/routes";
+import {ERROR, MESSAGE} from "../../routes/routes";
 import "./RegistrationForm.scss"
 import {setMessageAction} from "../../redux/actions/messages";
 
@@ -46,8 +46,7 @@ const Register = () => {
             dispatch(setMessageAction("Account was created. Go to link from email to confirm account"))
             router.push(MESSAGE)
         }, (err) => {
-            //TODO redirect to error
-            console.log(err)
+            router.push(ERROR)
         })
     };
 

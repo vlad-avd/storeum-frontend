@@ -27,7 +27,7 @@ const Home = () => {
                         <FolderTree folders={folders}/>
                     </Col>
                     <Col span={1}>
-                        <Divider className={"h100"} type="vertical" />
+                        <Divider style={{height: "90vh"}} type="vertical" />
                     </Col>
                     <Col span={19}>
                         <Row justify="center" style={{width: "100%", margin: "25px 0"}}>

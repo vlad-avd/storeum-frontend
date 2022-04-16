@@ -1,25 +1,23 @@
 import React from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {logoutAction} from "../../redux/actions/auth";
-import {Button, Col, Layout, Row, Space} from "antd";
-import {useHistory, useLocation} from "react-router-dom";
-import {DEFAULT, PROFILE} from "../../routes/routes";
-import "./Navbar.css"
+import {useSelector} from "react-redux";
+import {Button, Col, Layout, Row} from "antd";
+import {useHistory} from "react-router-dom";
+import {DEFAULT, LOGIN} from "../../routes/routes";
+import "./Navbar.scss"
+import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
+import AnonymousMenu from "../AnonymousMenu/AnonymousMenu";
 
 const Navbar = () => {
 
-    const dispatch = useDispatch()
     const router = useHistory();
     const {user} = useSelector((state) => state.auth);
 
-    let location = useLocation();
-    //TODO: create list of paths without navbar
-    if (location.pathname.match('/login') || location.pathname.match('/register') || !user) {
-        return null;
-    }
-
-    const handleLogout = () => {
-        dispatch(logoutAction(user.id))
+    const handleLogoClick = () => {
+        if (user) {
+            router.push(DEFAULT)
+        } else {
+            router.push(LOGIN)
+        }
     }
 
     return (
@@ -27,7 +25,7 @@ const Navbar = () => {
             <Row>
                 <Col span={12}>
                     <Button
-                        onClick={() => router.push(DEFAULT)}
+                        onClick={handleLogoClick}
                         type="link"
                         className="nav-button"
                     >
@@ -35,27 +33,10 @@ const Navbar = () => {
                     </Button>
                 </Col>
 
-                <Col span={12}>
-                    <Row justify="end">
-                        <Space>
-                                <Button
-                                    onClick={() => router.push(PROFILE)} type="link"
-                                    className="nav-button"
-                                >
-                                    {user.username}
-                                </Button>
-
-                            <Button
-                                onClick={handleLogout}
-                                type="primary"
-                                htmlType="submit"
-                                className="logout-button"
-                            >
-                                Logout
-                            </Button>
-                        </Space>
-                    </Row>
-                </Col>
+                {user
+                    ? <ProfileDropdown user={user}/>
+                    : <AnonymousMenu/>
+                }
 
             </Row>
         </Layout.Header>

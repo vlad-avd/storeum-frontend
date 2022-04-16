@@ -1,0 +1,41 @@
+.header-background {
+    background-color: white;
+    padding: 0 50px 0 50px;
+}
+
+.nav-button {
+    color: black;
+    &::selection {
+        color: black;
+    }
+}
+
+.logout-button {
+    border-radius: 10px;
+    border: none;
+}
+
+.ant-dropdown-trigger {
+    border: none;
+    &:hover {
+        color: #40a9ff;
+    }
+    &:focus {
+        color: black;
+    }
+    &:focus:hover {
+        color: #40a9ff;
+    }
+}
+
+.ant-btn-link {
+    &:hover {
+        color: #40a9ff;
+    }
+    &:focus {
+        color: black;
+    }
+    &:focus:hover {
+        color: #40a9ff;
+    }
+}

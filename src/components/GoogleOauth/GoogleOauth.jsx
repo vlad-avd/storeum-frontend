@@ -2,7 +2,7 @@ import React from 'react';
 import {useHistory, useLocation} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {exchangeOAuthTokeAction} from "../../redux/actions/auth";
-import {HOME, LOGIN} from "../../routes/routes";
+import {ERROR, HOME, LOGIN} from "../../routes/routes";
 
 const GoogleOauth = () => {
 
@@ -15,8 +15,7 @@ const GoogleOauth = () => {
         dispatch(exchangeOAuthTokeAction(token))
         router.push(HOME);
     } else {
-        //TODO: handle error
-        router.push(LOGIN);
+        router.push(ERROR);
     }
 
     return (
