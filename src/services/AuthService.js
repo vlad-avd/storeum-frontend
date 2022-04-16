@@ -5,11 +5,11 @@ export const AUTH_URL = '/auth'
 
 class AuthService {
 
-    login(username, password) {
-        return axios.post(`${API_URL + AUTH_URL}/login`, {username, password})
+    login(email, password) {
+        return axios.post(`${API_URL + AUTH_URL}/login`, {email, password})
             .then((response) => {
                 if (response.data.accessToken) {
-                    localStorage.setItem('user', JSON.stringify({id: response.data.id, username: response.data.username}));
+                    localStorage.setItem('user', JSON.stringify({id: response.data.id, email: response.data.email}));
                     localStorage.setItem('access-token', response.data.accessToken)
                     localStorage.setItem('refresh-token', response.data.refreshToken)
                 }
@@ -17,11 +17,23 @@ class AuthService {
             });
     }
 
-    register(username, email, password) {
-        return axios.post(`${API_URL + AUTH_URL}/register`, {username, email, password})
+    register(username, email, password, passwordConfirm) {
+        return axios.post(`${API_URL + AUTH_URL}/register`, {username, email, password, passwordConfirm})
             .then((response) => {
                 return response.data;
             })
+    }
+
+    exchangeOAuthToken(token) {
+        return axios.get(`${API_URL + AUTH_URL}/exchange-oauth?token=${token}`)
+            .then((response) => {
+                if (response.data.accessToken) {
+                    localStorage.setItem('user', JSON.stringify({id: response.data.id, email: response.data.email}));
+                    localStorage.setItem('access-token', response.data.accessToken)
+                    localStorage.setItem('refresh-token', response.data.refreshToken)
+                }
+                return response.data;
+            });
     }
 
     logout(userId) {

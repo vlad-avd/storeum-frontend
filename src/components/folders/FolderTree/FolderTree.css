@@ -1,0 +1,19 @@
+.add-folder:focus {
+    background-color: white;
+}
+
+.add-folder:hover {
+    background-color: rgba(196, 196, 196, 0.3);
+}
+
+.add-folder {
+    height: 100%;
+    background-color: white;
+    border-radius: 5px;
+    padding: 4px 0;
+    margin-top: 10px;
+}
+
+/*.ant-btn.ant-btn-text.ant-btn-sm.ant-btn-block.add-folder {*/
+/*    background: white;*/
+/*}*/

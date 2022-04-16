@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Button, Modal} from "antd";
-import '../../styles/antd-override.scss'
+import '../../../styles/antd-override.scss'
 import AddFolderModal from "../AddFolderModal/AddFolderModal";
 import DeleteFolderModal from "../DeleteFolderModal/DeleteFolderModal";
 

@@ -1,22 +1,22 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import "antd/dist/antd.css";
-import {Button, Divider, Form, Input} from "antd";
+import {Button, Col, Divider, Form, Input} from "antd";
 import {loginAction} from "../../redux/actions/auth";
 import Title from "antd/es/typography/Title";
-import "./LoginForm.css"
+import "./LoginForm.scss"
 import {GoogleOutlined} from "@ant-design/icons";
 
 const LoginForm = () => {
 
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const dispatch = useDispatch()
 
-    const onChangeUsername = (e) => {
-        const username = e.target.value;
-        setUsername(username);
+    const onChangeEmail = (e) => {
+        const email = e.target.value;
+        setEmail(email);
     };
 
     const onChangePassword = (e) => {
@@ -25,60 +25,47 @@ const LoginForm = () => {
     };
 
     const handleLogin = () => {
-        dispatch(loginAction(username, password))
+        dispatch(loginAction(email, password))
     };
 
     return (
-        <Form onFinish={handleLogin}>
-            <Title level={3}>
-                Login
-            </Title>
-
-            <Form.Item
-                labelCol={{span: 24}}
-                wrapperCol={{span: 24}}
-                label="Username"
-                name="username"
-                rules={[{ required: true, message: 'Please input your username!' }]}
-            >
-                <Input
-                    onChange={onChangeUsername}
-                    className="input-field"
-                />
-            </Form.Item>
-
-            <Form.Item
-                labelCol={{span: 24}}
-                wrapperCol={{span: 24}}
-                label="Password"
-                name="password"
-                rules={[{ required: true, message: 'Please input your password!' }]}
-            >
-                <Input.Password
-                    onChange={onChangePassword}
-                    className="input-field"
-                />
-            </Form.Item>
-
-            <Form.Item >
-                <Button
-                    block
-                    type="primary"
-                    htmlType="submit"
-                    className="main-button"
-                >
+        <Col>
+            <Form onFinish={handleLogin}>
+                <Title className={"form-title"}>
                     Login
-                </Button>
+                </Title>
 
-            </Form.Item>
+                <Form.Item name="email">
+                    <Input
+                        onChange={onChangeEmail}
+                        placeholder="Email *"
+                        className={"input-field"}
+                    />
+                </Form.Item>
 
-            <Form.Item>
-                <Divider className="form-divider" plain>
-                    or
-                </Divider>
-            </Form.Item>
+                <Form.Item name="password">
+                    <Input.Password
+                        onChange={onChangePassword}
+                        placeholder="Password *"
+                        className={"input-field"}
+                    />
+                </Form.Item>
 
-            <Form.Item>
+                <Form.Item >
+                    <Button
+                        block
+                        type="primary"
+                        htmlType="submit"
+                        className={"main-button"}
+                    >
+                        Login
+                    </Button>
+                </Form.Item>
+            </Form>
+
+            <Divider plain>or</Divider>
+
+            <a href="http://localhost:8080/api/v1/oauth2/authorize/google?redirect_uri==http://localhost:8080">
                 <Button
                     block
                     type="primary"
@@ -88,8 +75,8 @@ const LoginForm = () => {
                 >
                     Continue with Google
                 </Button>
-            </Form.Item>
-        </Form>
+            </a>
+        </Col>
     );
 };
 

@@ -1,25 +1,28 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 
-import {Button, Divider, Form, Input} from "antd";
+import {Button, Col, Divider, Form, Input, Row} from "antd";
 import {registerAction} from "../../redux/actions/auth";
 import Title from "antd/es/typography/Title";
 import {GoogleOutlined} from "@ant-design/icons";
 import {useHistory} from "react-router-dom";
-import {LOGIN} from "../../routes/routes";
-import "./RegistrationForm.css"
+import {MESSAGE} from "../../routes/routes";
+import "./RegistrationForm.scss"
+import {setMessageAction} from "../../redux/actions/messages";
 
 const Register = () => {
 
     const dispatch = useDispatch();
     const router = useHistory()
-    const [username, setUsername] = useState("");
+
+    const [firstName, setFirstName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordConfirm, setPasswordConfirm] = useState("");
 
-    const onChangeUsername = (e) => {
-        const username = e.target.value;
-        setUsername(username);
+    const onChangeFirstName = (e) => {
+        const firstName = e.target.value;
+        setFirstName(firstName);
     };
 
     const onChangeEmail = (e) => {
@@ -32,72 +35,78 @@ const Register = () => {
         setPassword(password);
     };
 
+    const onChangePasswordConfirmation = (e) => {
+        const passwordConfirm = e.target.value;
+        setPasswordConfirm(passwordConfirm);
+    };
+
+
     const handleRegister = () => {
-        dispatch(registerAction(username, email, password))
-        router.push(LOGIN)
+        dispatch(registerAction(firstName, email, password, passwordConfirm)).then(() => {
+            dispatch(setMessageAction("Account was created. Go to link from email to confirm account"))
+            router.push(MESSAGE)
+        }, (err) => {
+            //TODO redirect to error
+            console.log(err)
+        })
     };
 
     return (
-        <Form onFinish={handleRegister}>
-            <Title level={3}>
-                Create account
-            </Title>
-
-            <Form.Item
-                labelCol={{span: 24}}
-                wrapperCol={{span: 24}}
-                label="Username"
-                name="username"
-                rules={[{ required: true, message: 'Please input your username!' }]}
-            >
-                <Input
-                    onChange={onChangeUsername}
-                    className="input-field"
-                />
-            </Form.Item>
-
-            <Form.Item
-                labelCol={{span: 24}}
-                wrapperCol={{span: 24}}
-                label="Email"
-                name="email"
-                rules={[{ required: true, message: 'Please input your email!' }]}
-            >
-                <Input
-                    onChange={onChangeEmail}
-                    className="input-field"
-                />
-            </Form.Item>
-
-            <Form.Item
-                labelCol={{span: 24}}
-                wrapperCol={{span: 24}}
-                label="Password"
-                name="password"
-                rules={[{ required: true, message: 'Please input your password!' }]}
-            >
-                <Input.Password
-                    onChange={onChangePassword}
-                    className="input-field"
-                />
-            </Form.Item>
-
-            <Form.Item >
-                <Button
-                    block
-                    type="primary"
-                    htmlType="submit"
-                    className="main-button"
-                >
+        <Col>
+            <Form onFinish={handleRegister}>
+                <Title className={"form-title"}>
                     Create account
-                </Button>
-            </Form.Item>
+                </Title>
 
-            <Form.Item>
-                <Divider className="form-divider" plain>or</Divider>
-            </Form.Item>
+                <Form.Item name="firstName">
+                    <Input
+                        onChange={onChangeFirstName}
+                        placeholder="First Name *"
+                        className="input-field"
+                    />
+                </Form.Item>
 
-            <Form.Item>
+                <Form.Item name="email">
+                    <Input
+                        onChange={onChangeEmail}
+                        placeholder="Email *"
+                        className="input-field"
+                    />
+                </Form.Item>
+
+                <Row>
+                    <Form.Item name="password">
+                        <Input.Password
+                            onChange={onChangePassword}
+                            placeholder="Password"
+                            className="password-field"
+                        />
+                    </Form.Item>
+
+                    <Form.Item name="passwordConfirmation">
+                        <Input.Password
+                            onChange={onChangePasswordConfirmation}
+                            placeholder="Confirmation *"
+                            className="password-confirm-field"
+                        />
+                    </Form.Item>
+                </Row>
+
+                <Form.Item >
+                    <Button
+                        block
+                        type="primary"
+                        htmlType="submit"
+                        className="main-button"
+                    >
+                        Create account
+                    </Button>
+                </Form.Item>
+            </Form>
+
+            <Divider plain>or</Divider>
+
+            <a href="http://localhost:8080/api/v1/oauth2/authorize/google?redirect_uri==http://localhost:8080">
                 <Button
                     block
                     type="primary"
@@ -107,8 +116,8 @@ const Register = () => {
                 >
                     Continue with Google
                 </Button>
-            </Form.Item>
-        </Form>
+            </a>
+        </Col>
     );
 };
 

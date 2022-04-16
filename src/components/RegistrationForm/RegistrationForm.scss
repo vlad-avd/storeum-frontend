@@ -1,0 +1,17 @@
+@import "src/components/LoginForm/LoginForm";
+
+@mixin base {
+  height: 50px;
+  width: 160px;
+  border-radius: 5px !important;
+  margin-bottom: 20px;
+}
+
+.password-field {
+  @include base;
+  margin-right: 30px;
+}
+
+.password-confirm-field {
+  @include base;
+}

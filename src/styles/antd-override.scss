@@ -1,7 +1,3 @@
-.ant-tree-title {
-  display: block !important;
-}
-
 .ant-tree-iconEle {
   float: left;
 }
@@ -16,4 +12,87 @@
 
 .add-folder-modal div div.ant-modal-body {
   padding-bottom: 0;
+}
+
+.ant-tree-node-content-wrapper {
+  width: 100%;
+}
+
+//.ant-tree-title {
+//  display: block;
+//  width: 100% !important;
+//}
+
+.ant-tree-treenode:hover {
+  background-color: rgba(196, 196, 196, 0.3);
+}
+
+.ant-tree-treenode {
+  //all-tree nodes
+  //background: greenyellow;
+  width: 100%;
+  padding: 4px 0 !important;
+  padding-left: 10px !important;
+  border-radius: 5px;
+}
+
+.ant-tree-switcher_close {
+  color: #938686;
+}
+
+.ant-tree-switcher_open {
+  color: #2C92EF;
+}
+
+.ant-tree-switcher:hover {
+  color: #2C92EF;
+}
+
+.ant-tree-treenode-selected {
+  background-color: rgba(196, 196, 196, 0.3);
+  border-radius: 5px;
+}
+
+.ant-tree-treenode-selected .ant-tree-title{
+  background-color: rgba(196, 196, 196, 0);
+}
+
+.ant-tree-node-content-wrapper.ant-tree-node-content-wrapper-open.ant-tree-node-selected{
+  background-color: rgba(196, 196, 196, 0);
+}
+
+.ant-tree-node-content-wrapper.ant-tree-node-content-wrapper-open:hover{
+  background-color: rgba(196, 196, 196, 0);
+}
+
+.ant-tree-node-content-wrapper.ant-tree-node-content-wrapper-close.ant-tree-node-selected{
+  background-color: rgba(196, 196, 196, 0);
+}
+
+.ant-tree-node-content-wrapper.ant-tree-node-content-wrapper-close:hover{
+  background-color: rgba(196, 196, 196, 0);
+}
+
+.ant-tree-node-content-wrapper.ant-tree-node-content-wrapper-normal {
+  width: 100%;
+}
+
+.ant-tree-node-content-wrapper.ant-tree-node-content-wrapper-normal:hover {
+  background-color: rgba(196, 196, 196, 0);
+}
+
+.ant-tree-node-content-wrapper.ant-tree-node-content-wrapper-normal.ant-tree-node-selected {
+  background-color: rgba(196, 196, 196, 0);
+}
+
+.ant-tree-treenode-leaf-last .ant-tree-node-content-wrapper .title:hover{
+  background-color: rgba(196, 196, 196, 0);
+}
+
+.ant-tree-node-selected .title {
+  font-weight: bold;
+}
+
+.ant-layout {
+  background-color: white;
 }

@@ -2,12 +2,13 @@ import React, {useState} from 'react';
 import {Button, Layout, Tree} from "antd";
 import TreeElement from "../TreeElement/TreeElement";
 import AddFolderModal from "../AddFolderModal/AddFolderModal";
-
-const {DirectoryTree} = Tree;
+import {DownOutlined, PlusOutlined} from "@ant-design/icons";
+import './FolderTree.css'
 
 const FolderTree = ({folders}) => {
 
     const [isAddFolderModalVisible, setIsAddFolderModalVisible] = useState(false);
+    const [selectedFolderId, setSelectedFolderId] = useState(0)
 
     const handleAddFolder = () => {
         setIsAddFolderModalVisible(true);
@@ -23,19 +24,26 @@ const FolderTree = ({folders}) => {
             if (folder.subFolders.length) {
                 return ({
                         key: folder.id,
-                        title: <TreeElement folder={folder}/>,
+                        title: <TreeElement
+                            folder={folder}
+                            selected={selectedFolderId}
+                            setSelected={setSelectedFolderId} />,
                         children: renderTreeNodes(folder.subFolders)})
             }
             return ({
                 key: folder.id,
-                title: <TreeElement folder={folder}/>,
+                title: <TreeElement
+                    folder={folder}
+                    selected={selectedFolderId}
+                    setSelected={setSelectedFolderId} />,
                 children: []})
         });
     }
 
     return (
         <Layout>
-            <DirectoryTree
+            <Tree
+                switcherIcon={<DownOutlined style={{marginRight: "10px"}} />}
                 treeData={renderTreeNodes(folders)}
             />
             <AddFolderModal
@@ -43,6 +51,7 @@ const FolderTree = ({folders}) => {
                 handleClose={closeAddFolderModal}
             />
             <Button
+                type={"text"}
                 /*TODO: add folder styles*/
                 onClick={handleAddFolder}
                 className="add-folder"
@@ -50,6 +59,7 @@ const FolderTree = ({folders}) => {
                 htmlType="submit"
                 size={"small"}
             >
+                    <PlusOutlined style={{color: "rgba(44, 146, 239, 0.75)", fontSize: "16px"}} />
                 Add folder
             </Button>
         </Layout>

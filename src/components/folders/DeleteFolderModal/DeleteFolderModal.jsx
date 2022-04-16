@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {deleteFolderAction} from "../../redux/actions/folders";
+import {deleteFolderAction} from "../../../redux/actions/folders";
 import {Modal} from "antd";
 
 const DeleteFolderModal = ({isVisible, handleClose, handleCloseWithParent, folderId}) => {

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Form, Input, Modal} from "antd";
 import {useDispatch, useSelector} from "react-redux";
-import {addFolderAction} from "../../redux/actions/folders";
+import {addFolderAction} from "../../../redux/actions/folders";
 
 const AddFolderModal = ({isVisible, handleClose, handleCloseWithParent, parentFolderId}) => {
 

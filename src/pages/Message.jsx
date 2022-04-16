@@ -1,15 +1,18 @@
 import React from 'react';
+import "./styles.scss"
 import {Button, Col, Layout, Row} from "antd";
-import LoginForm from "../components/LoginForm/LoginForm";
-import {REGISTER} from "../routes/routes";
+import {useSelector} from "react-redux";
+import Title from "antd/es/typography/Title";
+import {LOGIN, REGISTER} from "../routes/routes";
 import {useHistory} from "react-router-dom";
 
-const Login = () => {
+const Message = () => {
 
+    const {message} = useSelector(state => state.messages)
     const router = useHistory()
 
     return (
-        <Layout>
+        <div>
             <Layout.Header style={{backgroundColor: "white", padding: "0 20px 0 50px", height:"10vh"}}>
                 <Row>
                     <Col span={12}>
@@ -29,15 +32,33 @@ const Login = () => {
                     </Col>
                 </Row>
             </Layout.Header>
+
             <Row
                 justify="center"
                 align="middle"
                 style={{backgroundColor: "white", height:"90vh"}}
             >
-                <LoginForm/>
+                <Col span={12}>
+                    <Row justify="center"
+                         align="middle">
+                        <Title className={"form-title"}>{message}</Title>
+                    </Row>
+                    <Row justify="center"
+                         align="middle">
+                        <Button
+                            onClick={() => router.push(LOGIN)}
+                            block
+                            type="primary"
+                            htmlType="submit"
+                            className={"main-button"}
+                        >
+                            Go to login page
+                        </Button>
+                    </Row>
+                </Col>
             </Row>
-        </Layout>
+        </div>
     );
 };
 
-export default Login;
+export default Message;

@@ -3,9 +3,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {Col, Divider, Layout, Row} from "antd";
 import '../styles/App.css'
 import {Content} from "antd/es/layout/layout";
-import FolderTree from "../components/FolderTree/FolderTree";
+import FolderTree from "../components/folders/FolderTree/FolderTree";
 import {getFoldersAction} from "../redux/actions/folders";
-import Notes from "../components/Notes/Notes";
+import Notes from "../components/notes/Notes/Notes";
 
 const Home = () => {
 
