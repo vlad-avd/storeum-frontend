@@ -4,7 +4,7 @@ import {EditOutlined, LinkOutlined} from "@ant-design/icons";
 import Meta from "antd/lib/card/Meta";
 import NoteOptions from "../NoteOptions/NoteOptions";
 
-const NoteContent = ({note}) => {
+const Note = ({note}) => {
 
     const [isPopupVisible, setIsPopupVisible] = useState(false);
 
@@ -68,4 +68,4 @@ const NoteContent = ({note}) => {
     );
 };
 
-export default NoteContent;
+export default Note;

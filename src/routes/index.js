@@ -5,11 +5,11 @@ import {CONTENT, DEFAULT, ERROR, HOME, LOGIN, MESSAGE, OAUTH, REGISTER} from "./
 import Registration from "../pages/Registration";
 import GoogleOauth from "../components/GoogleOauth/GoogleOauth";
 import Message from "../pages/Message";
-import Content from "../pages/Content";
+import NoteContent from "../pages/NoteContent";
 
 export const privateRoutes = [
     {path: [DEFAULT, HOME], component: Home, exact: true},
-    {path: [DEFAULT, CONTENT], component: Content, exact: true},
+    {path: CONTENT, component: NoteContent, exact: true},
 ]
 
 export const publicRoutes = [

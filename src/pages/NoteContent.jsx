@@ -1,25 +1,29 @@
-import React, {useEffect} from "react";
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {Col, Divider, Layout, Row} from "antd";
-import '../styles/App.css'
-import {Content} from "antd/es/layout/layout";
-import FolderTree from "../components/folders/FolderTree/FolderTree";
 import {getFoldersAction} from "../redux/actions/folders";
-import {REMOVE_FOLDER_ID} from "../redux/actions/types";
+import {Col, Divider, Layout, Row} from "antd";
+import FolderTree from "../components/folders/FolderTree/FolderTree";
+import NoteList from "../components/notes/NoteList/NoteList";
+import {Content} from "antd/es/layout/layout";
+import {useHistory, useLocation} from "react-router-dom";
+import {HOME} from "../routes/routes";
 
-const Home = () => {
+const NoteContent = () => {
 
     const dispatch = useDispatch();
     const {user} = useSelector(state => state.auth)
     const {folders} = useSelector(state => state.folders)
-
-    dispatch({type: REMOVE_FOLDER_ID})
+    const {notes, folderId} = useSelector(state => state.notes)
+    const location = useLocation()
+    const router = useHistory()
 
     useEffect(() => {
         dispatch(getFoldersAction(user.id))
     }, [user.id])
 
-    console.log("Render Home")
+    if (notes.length === 0 && !folderId && location.pathname === "/notes") {
+        router.push(HOME)
+    }
 
     return (
         <Layout style={{backgroundColor: "white", padding: "0"}}>
@@ -33,7 +37,9 @@ const Home = () => {
                         <Divider style={{height: "90vh"}} type="vertical" />
                     </Col>
                     <Col span={19}>
-                        Here will be your newest notes
+                        <Row justify="center" style={{width: "100%", margin: "25px 0"}}>
+                            <NoteList notes={notes} />
+                        </Row>
                     </Col>
                 </Row>
             </Content>
@@ -41,4 +47,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default NoteContent;

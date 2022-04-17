@@ -7,13 +7,18 @@ import FolderActionsModal from "../FolderActionsModal/FolderActionsModal";
 import {useDispatch, useSelector} from "react-redux";
 import {getNotesAction} from "../../../redux/actions/notes";
 import {CLOSE_FOLDER_ACTIONS_MODAL, OPEN_FOLDER_ACTIONS_MODAL} from "../../../redux/actions/types";
+import {useHistory, useLocation} from "react-router-dom";
+import {CONTENT} from "../../../routes/routes";
 
-const TreeElement = ({folder, selected, setSelected}) => {
+const TreeElement = ({folder}) => {
 
     const dispatch = useDispatch();
     const {user} = useSelector(state => state.auth)
     const {isOpened} = useSelector(state => state.folderActionsModal)
     const [isFolderActionsModalVisible, setIsFolderActionsModalVisible] = useState(false);
+    const router = useHistory();
+    const location = useLocation();
+    const {folderId} = useSelector(state => state.notes)
 
     const handleOpenActions = (e) => {
         e.stopPropagation()
@@ -27,23 +32,25 @@ const TreeElement = ({folder, selected, setSelected}) => {
     }
 
     const handleFolderClick = (e) => {
-        if (selected === folder.id) {
+        if (folderId === folder.id) {
             e.stopPropagation();
             return
-        } else {
-            setSelected(folder.id)
         }
         if (isOpened) {
             e.stopPropagation();
         } else {
-            dispatch(getNotesAction(user.id, folder.id))
+            dispatch(getNotesAction(user.id, folder.id)).then(() => {
+                if (location.pathname === "/" || location.pathname === "/home") {
+                    router.push(CONTENT)
+                }
+            })
         }
     }
 
     return (
         <span
+            className={folderId === folder.id ? "selected-node title" : "title"}
             onClick={handleFolderClick}
-            className="title"
             style={{display: "block", /*paddingLeft: "20px"*/}}
         >
             <FolderActionsModal

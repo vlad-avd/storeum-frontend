@@ -4,11 +4,12 @@ import TreeElement from "../TreeElement/TreeElement";
 import AddFolderModal from "../AddFolderModal/AddFolderModal";
 import {DownOutlined, PlusOutlined} from "@ant-design/icons";
 import './FolderTree.css'
+import {useSelector} from "react-redux";
 
 const FolderTree = ({folders}) => {
 
     const [isAddFolderModalVisible, setIsAddFolderModalVisible] = useState(false);
-    const [selectedFolderId, setSelectedFolderId] = useState(0)
+    const {folderId} = useSelector(state => state.notes)
 
     const handleAddFolder = () => {
         setIsAddFolderModalVisible(true);
@@ -23,19 +24,15 @@ const FolderTree = ({folders}) => {
         return data.map(folder => {
             if (folder.subFolders.length) {
                 return ({
+                        className: folderId === folder.id ? "ant-tree-treenode-selected" : "",
                         key: folder.id,
-                        title: <TreeElement
-                            folder={folder}
-                            selected={selectedFolderId}
-                            setSelected={setSelectedFolderId} />,
+                        title: <TreeElement folder={folder} />,
                         children: renderTreeNodes(folder.subFolders)})
             }
             return ({
+                className: folderId === folder.id ? "ant-tree-treenode-selected" : "",
                 key: folder.id,
-                title: <TreeElement
-                    folder={folder}
-                    selected={selectedFolderId}
-                    setSelected={setSelectedFolderId} />,
+                title: <TreeElement folder={folder} />,
                 children: []})
         });
     }

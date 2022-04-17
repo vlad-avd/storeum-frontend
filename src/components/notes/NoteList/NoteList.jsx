@@ -1,9 +1,9 @@
 import React from 'react';
 import {Row} from "antd";
-import NoteContent from "../NoteContent/NoteContent";
+import Note from "../Note/Note";
 import NoteFilters from "../NoteFilters/NoteFilters";
 
-const Notes = ({notes}) => {
+const NoteList = ({notes}) => {
 
     //TODO: to render multi rows with N cols in each row
 /*    const N = 3;
@@ -16,7 +16,7 @@ const Notes = ({notes}) => {
             <>
                 <NoteFilters/>
                 <Row gutter={[16, 16]} justify="start">
-                    {notes.map(note =><NoteContent note={note} />)}
+                    {notes.map(note =><Note note={note} />)}
                 </Row>
             </>
             :
@@ -24,4 +24,4 @@ const Notes = ({notes}) => {
     );
 }
 
-export default Notes;
+export default NoteList;
