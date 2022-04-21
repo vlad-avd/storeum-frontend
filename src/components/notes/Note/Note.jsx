@@ -17,6 +17,8 @@ const Note = ({note}) => {
         if (newWindow) newWindow.opener = null
     }
 
+    // console.log("Render Note")
+
     return (
         <Col span={6}>
             {note.link

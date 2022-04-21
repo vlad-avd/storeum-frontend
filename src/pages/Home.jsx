@@ -13,7 +13,9 @@ const Home = () => {
     const {user} = useSelector(state => state.auth)
     const {folders} = useSelector(state => state.folders)
 
-    dispatch({type: REMOVE_FOLDER_ID})
+    useEffect(() => {
+        dispatch({type: REMOVE_FOLDER_ID})
+    })
 
     useEffect(() => {
         dispatch(getFoldersAction(user.id))

@@ -20,6 +20,8 @@ const Navbar = () => {
         }
     }
 
+    // console.log("Render Navbar")
+
     return (
         <Layout.Header className="header-background" >
             <Row>

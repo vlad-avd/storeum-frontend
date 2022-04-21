@@ -50,6 +50,8 @@ const Register = () => {
         })
     };
 
+    // console.log("Render Register")
+
     return (
         <Col>
             <Form onFinish={handleRegister}>

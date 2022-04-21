@@ -1,0 +1,31 @@
+@mixin base {
+  height: 40px;
+  width: 25vw;
+  border-radius: 5px !important;
+}
+
+.modal-form-title {
+  text-align: center;
+  font-size: 24px !important;
+  margin-bottom: 40px !important;
+}
+
+.input-folder-title {
+  @include base;
+  margin-bottom: 20px;
+}
+
+.save-btn {
+  @include base;
+  width: 12vw;
+}
+
+.cancel-btn {
+  @include base;
+  width: 12vw;
+  margin-right: 1vw;
+}
+
+.ant-modal-content {
+  border-radius: 5px;
+}

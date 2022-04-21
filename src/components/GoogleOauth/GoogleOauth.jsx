@@ -2,7 +2,7 @@ import React from 'react';
 import {useHistory, useLocation} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {exchangeOAuthTokeAction} from "../../redux/actions/auth";
-import {ERROR, HOME, LOGIN} from "../../routes/routes";
+import {ERROR, HOME} from "../../routes/routes";
 
 const GoogleOauth = () => {
 
@@ -12,11 +12,14 @@ const GoogleOauth = () => {
     const router = useHistory()
 
     if ({token}) {
+        //TODO: loader component while executing request
         dispatch(exchangeOAuthTokeAction(token))
         router.push(HOME);
     } else {
         router.push(ERROR);
     }
+
+    // console.log("Render GoogleOauth")
 
     return (
         <></>

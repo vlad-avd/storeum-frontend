@@ -11,6 +11,8 @@ const Message = () => {
     const {message} = useSelector(state => state.messages)
     const router = useHistory()
 
+    console.log("Render Message")
+
     return (
         <div>
             <Layout.Header style={{backgroundColor: "white", padding: "0 20px 0 50px", height:"10vh"}}>

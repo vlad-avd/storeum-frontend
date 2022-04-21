@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Layout, Tree} from "antd";
 import TreeElement from "../TreeElement/TreeElement";
-import AddFolderModal from "../AddFolderModal/AddFolderModal";
+import FolderInputModal from "../AddFolderModal/FolderInputModal";
 import {DownOutlined, PlusOutlined} from "@ant-design/icons";
 import './FolderTree.css'
 import {useSelector} from "react-redux";
@@ -37,15 +37,18 @@ const FolderTree = ({folders}) => {
         });
     }
 
+    console.log("Render FolderTree")
+
     return (
         <Layout>
             <Tree
                 switcherIcon={<DownOutlined style={{marginRight: "10px"}} />}
                 treeData={renderTreeNodes(folders)}
             />
-            <AddFolderModal
+            <FolderInputModal
                 isVisible={isAddFolderModalVisible}
                 handleClose={closeAddFolderModal}
+                buttonText="Save"
             />
             <Button
                 type={"text"}

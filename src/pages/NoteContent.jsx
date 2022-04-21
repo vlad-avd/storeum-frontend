@@ -25,6 +25,8 @@ const NoteContent = () => {
         router.push(HOME)
     }
 
+    console.log("Render NoteContent")
+
     return (
         <Layout style={{backgroundColor: "white", padding: "0"}}>
             <Divider style={{margin: 0}}/>

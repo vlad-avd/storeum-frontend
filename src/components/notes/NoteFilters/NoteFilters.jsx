@@ -15,6 +15,8 @@ const NoteFilters = () => {
         setSelectedTags(nextSelectedTags);
     }
 
+    // console.log("Render NoteFilters")
+
     return (
         <Row style={{marginBottom: "20px"}}>
                         <Col>

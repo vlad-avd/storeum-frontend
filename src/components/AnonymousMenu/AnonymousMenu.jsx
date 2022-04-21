@@ -8,6 +8,8 @@ const AnonymousMenu = () => {
     const router = useHistory()
     const location = useLocation();
 
+    console.log("Render AnonymousMenu")
+
     return (
         <Col span={12}>
             {location.pathname === "/login"

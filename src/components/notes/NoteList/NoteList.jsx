@@ -10,6 +10,8 @@ const NoteList = ({notes}) => {
     const rows = [...Array(Math.ceil(notes.length / N))];
     const notesRows = rows.map((row, idx) => notes.slice(idx * N, idx * N + N));*/
 
+    // console.log("Render NoteList")
+
     return (
         notes.length
             ?

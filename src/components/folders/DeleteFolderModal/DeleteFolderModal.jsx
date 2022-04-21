@@ -13,6 +13,8 @@ const DeleteFolderModal = ({isVisible, handleClose, handleCloseWithParent, folde
         handleCloseWithParent(e);
     }
 
+    // console.log("Render DeleteFolderModal")
+
     return (
         <Modal
             okText="Delete"

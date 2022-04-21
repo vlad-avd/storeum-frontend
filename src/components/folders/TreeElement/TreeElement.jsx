@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {EllipsisOutlined} from "@ant-design/icons";
-import {Button} from "antd";
+import {Button, Popover} from "antd";
 import './TreeElement.css'
 import '../../../styles/antd-override.scss'
 import FolderActionsModal from "../FolderActionsModal/FolderActionsModal";
@@ -22,8 +22,8 @@ const TreeElement = ({folder}) => {
 
     const handleOpenActions = (e) => {
         e.stopPropagation()
-        setIsFolderActionsModalVisible(true);
-        dispatch({type: OPEN_FOLDER_ACTIONS_MODAL});
+        // setIsFolderActionsModalVisible(true);
+        // dispatch({type: OPEN_FOLDER_ACTIONS_MODAL});
     }
 
     const handleCloseActions = () => {
@@ -47,6 +47,18 @@ const TreeElement = ({folder}) => {
         }
     }
 
+    // console.log("Render TreeElement")
+
+    const content = (
+        <div>
+            <a>Add Folder</a>
+            <br/>
+            <a>Rename</a>
+            <br/>
+            <a>Delete</a>
+        </div>
+    );
+
     return (
         <span
             className={folderId === folder.id ? "selected-node title" : "title"}
@@ -59,16 +71,18 @@ const TreeElement = ({folder}) => {
                 folder={folder}
             />
             {folder.title}
-            <Button
-                onClick={handleOpenActions}
-                className="hide"
-                block
-                type="text"
-                htmlType="submit"
-                size={"small"}
-                style={{float: "right", textShadow: "none", verticalAlign: "middle", border: "none"}}
-                icon={<EllipsisOutlined className={"folder-options"} rotate={90} style={{verticalAlign: "middle"}}/>}
-            />
+            <Popover placement="right" title={null} content={content} trigger="click">
+                <Button
+                    onClick={handleOpenActions}
+                    className="hide"
+                    block
+                    type="text"
+                    htmlType="submit"
+                    size={"small"}
+                    style={{float: "right", textShadow: "none", verticalAlign: "middle", border: "none"}}
+                    icon={<EllipsisOutlined className={"folder-options"} rotate={90} style={{verticalAlign: "middle"}}/>}
+                />
+            </Popover>
         </span>
     );
 }

@@ -12,6 +12,8 @@ const ProfileDropdown = ({user}) => {
         dispatch(logoutAction(user.id))
     }
 
+    // console.log("Render ProfileDropdown")
+
     const dropDownMenu = (
         <Menu>
             <Menu.Item key="0">

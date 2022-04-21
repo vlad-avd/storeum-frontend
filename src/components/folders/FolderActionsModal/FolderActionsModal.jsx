@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Modal} from "antd";
 import '../../../styles/antd-override.scss'
-import AddFolderModal from "../AddFolderModal/AddFolderModal";
+import FolderInputModal from "../AddFolderModal/FolderInputModal";
 import DeleteFolderModal from "../DeleteFolderModal/DeleteFolderModal";
 
 const FolderActionsModal = ({isVisible, handleClose, folder}) => {
@@ -39,6 +39,8 @@ const FolderActionsModal = ({isVisible, handleClose, folder}) => {
         setIsDeleteFolderModalVisible(false)
     }
 
+    // console.log("Render FolderActionsModal")
+
     return (
         <Modal
             width={"200px"}
@@ -69,11 +71,12 @@ const FolderActionsModal = ({isVisible, handleClose, folder}) => {
             >
                 Delete
             </Button>
-            <AddFolderModal
+            <FolderInputModal
                 isVisible={isAddFolderModalVisible}
                 handleClose={closeAddFolderModal}
                 handleCloseWithParent={closeAddFolderModalWithParent}
                 parentFolderId={folder.id}
+                buttonText="Save"
             />
             <Button
                 onClick={addFolder}
