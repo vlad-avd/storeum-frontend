@@ -28,13 +28,13 @@ const Home = () => {
             <Divider style={{margin: 0}}/>
             <Content style={{ padding: '0 25px' }}>
                 <Row className={"h75"} justify="start">
-                    <Col style={{paddingTop: "10px"}} span={4}>
+                    <Col style={{paddingTop: "10px", marginTop: "50px"}} span={4}>
                         <FolderTree folders={folders}/>
                     </Col>
                     <Col span={1}>
                         <Divider style={{height: "90vh"}} type="vertical" />
                     </Col>
-                    <Col span={19}>
+                    <Col span={19} style={{marginTop: "50px", paddingRight: "100px", paddingBottom: "200px", display: "flex", alignItems: "center", justifyContent: "center"}}>
                         Here will be your newest notes
                     </Col>
                 </Row>

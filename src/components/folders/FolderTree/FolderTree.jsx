@@ -48,7 +48,7 @@ const FolderTree = ({folders}) => {
             <FolderInputModal
                 isVisible={isAddFolderModalVisible}
                 handleClose={closeAddFolderModal}
-                buttonText="Save"
+                title="Create Folder"
             />
             <Button
                 type={"text"}

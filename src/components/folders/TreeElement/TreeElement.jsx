@@ -3,32 +3,34 @@ import {EllipsisOutlined} from "@ant-design/icons";
 import {Button, Popover} from "antd";
 import './TreeElement.css'
 import '../../../styles/antd-override.scss'
-import FolderActionsModal from "../FolderActionsModal/FolderActionsModal";
+import FolderOptions from "../FolderActionsModal/FolderOptions";
 import {useDispatch, useSelector} from "react-redux";
 import {getNotesAction} from "../../../redux/actions/notes";
-import {CLOSE_FOLDER_ACTIONS_MODAL, OPEN_FOLDER_ACTIONS_MODAL} from "../../../redux/actions/types";
 import {useHistory, useLocation} from "react-router-dom";
 import {CONTENT} from "../../../routes/routes";
+import {CLOSE_MODAL, OPEN_MODAL} from "../../../redux/actions/types";
 
 const TreeElement = ({folder}) => {
 
     const dispatch = useDispatch();
     const {user} = useSelector(state => state.auth)
     const {isOpened} = useSelector(state => state.folderActionsModal)
-    const [isFolderActionsModalVisible, setIsFolderActionsModalVisible] = useState(false);
     const router = useHistory();
     const location = useLocation();
     const {folderId} = useSelector(state => state.notes)
+    const [isOptionsVisible, setIsOptionsVisible] = useState(false)
 
     const handleOpenActions = (e) => {
         e.stopPropagation()
-        // setIsFolderActionsModalVisible(true);
-        // dispatch({type: OPEN_FOLDER_ACTIONS_MODAL});
+        setIsOptionsVisible(true)
+        dispatch({type: OPEN_MODAL});
     }
 
-    const handleCloseActions = () => {
-        setIsFolderActionsModalVisible(false);
-        dispatch({type: CLOSE_FOLDER_ACTIONS_MODAL});
+    const handleVisibleChange = (visible) => {
+        if (isOptionsVisible === false && isOpened === true) {
+            dispatch({type: CLOSE_MODAL});
+        }
+        setIsOptionsVisible(visible);
     }
 
     const handleFolderClick = (e) => {
@@ -50,13 +52,10 @@ const TreeElement = ({folder}) => {
     // console.log("Render TreeElement")
 
     const content = (
-        <div>
-            <a>Add Folder</a>
-            <br/>
-            <a>Rename</a>
-            <br/>
-            <a>Delete</a>
-        </div>
+        <FolderOptions
+            handleCloseOptions={() => setIsOptionsVisible(false)}
+            folder={folder}
+        />
     );
 
     return (
@@ -65,13 +64,8 @@ const TreeElement = ({folder}) => {
             onClick={handleFolderClick}
             style={{display: "block", /*paddingLeft: "20px"*/}}
         >
-            <FolderActionsModal
-                isVisible={isFolderActionsModalVisible}
-                handleClose={handleCloseActions}
-                folder={folder}
-            />
             {folder.title}
-            <Popover placement="right" title={null} content={content} trigger="click">
+            <Popover onVisibleChange={handleVisibleChange} visible={isOptionsVisible} placement="right" title={null} content={content} trigger="click">
                 <Button
                     onClick={handleOpenActions}
                     className="hide"

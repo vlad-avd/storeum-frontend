@@ -19,6 +19,10 @@ const Note = ({note}) => {
 
     // console.log("Render Note")
 
+    const tags = note.tags.map((tag) =>
+        <a style={{fontSize: "12px"}} key={tag.id}> #{tag.title} </a>
+    )
+
     return (
         <Col span={6}>
             {note.link
@@ -26,9 +30,9 @@ const Note = ({note}) => {
                 <Card>
                     <Meta
                         title={
-                        <div>
-                            {note.title}
-                            <span style={{float: "right"}}>
+                            <div>
+                                {note.title}
+                                <span style={{float: "right"}}>
                             <LinkOutlined key="ellipsis" onClick={() => openInNewTab(note.link)}/>
                             <Popover
                                 placement="top"
@@ -40,8 +44,17 @@ const Note = ({note}) => {
                                 <EditOutlined style={{marginLeft: "20px"}} key="options" />
                             </Popover>
                             </span>
-                        </div>}
-                        description={note.description ? note.description : ''}
+                            </div>}
+                        description={
+                            <div>
+                                <div>
+                                {note.description ? note.description : ''}
+                                    </div>
+                                <div style={{marginTop: "5px"}}>
+                                    {tags}
+                                </div>
+                            </div>
+                        }
                     />
                 </Card>
                 :
@@ -52,18 +65,28 @@ const Note = ({note}) => {
                                 {note.title}
                                 <span style={{float: "right"}}>
                                 <Popover
-                            placement="top"
-                            content={<NoteOptions/>}
-                            trigger="click"
-                            visible={isPopupVisible}
-                            onVisibleChange={handlePopupVisibility}
-                        >
+                                    placement="top"
+                                    content={<NoteOptions/>}
+                                    trigger="click"
+                                    visible={isPopupVisible}
+                                    onVisibleChange={handlePopupVisibility}
+                                >
                             <EditOutlined key="options" />
                         </Popover>
                                 </span>
                             </div>}
-                            description={note.description ? note.description : ''}
-                        />
+                        description={
+                            <div>
+                                <div>
+                                {note.description ? note.description : ''}
+                                    </div>
+                                <div style={{marginTop: "5px"}}>
+                                    {tags}
+                                </div>
+                            </div>
+                        }
+
+                    />
                 </Card>
             }
         </Col>
