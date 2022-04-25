@@ -26,9 +26,6 @@ const FolderInputModal = ({isVisible, handleClose, parentFolderId, title}) => {
         // }
     }
 
-    // console.log("Render AddFolderModal")
-
-    {/*TODO: set footer as null & move buttons to content*/}
     return (
         <Modal
             className={"add-folder-modal"}

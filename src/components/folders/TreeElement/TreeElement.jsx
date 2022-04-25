@@ -4,19 +4,17 @@ import {Button, Popover} from "antd";
 import './TreeElement.scss'
 import FolderOptions from "../FolderActionsModal/FolderOptions";
 import {useDispatch, useSelector} from "react-redux";
-import {getNotesAction} from "../../../redux/actions/notes";
 import {useHistory, useLocation} from "react-router-dom";
 import {CONTENT} from "../../../routes/routes";
-import {CLOSE_MODAL} from "../../../redux/actions/types";
+import {CLOSE_MODAL, SET_FOLDER_ID} from "../../../redux/actions/types";
 
 const TreeElement = ({folder}) => {
 
     const dispatch = useDispatch();
-    const {user} = useSelector(state => state.auth)
     const {isOpened} = useSelector(state => state.folderActionsModal)
     const router = useHistory();
     const location = useLocation();
-    const {folderId} = useSelector(state => state.notes)
+    const {selectedId} = useSelector(state => state.folders)
     const [isOptionsVisible, setIsOptionsVisible] = useState(false)
 
     const handleOpenActions = (e) => {
@@ -32,19 +30,17 @@ const TreeElement = ({folder}) => {
     }
 
     const handleFolderClick = (e) => {
-        if (folderId === folder.id) {
+        if (selectedId === folder.id) {
             e.stopPropagation();
             return
         }
         if (isOpened) {
             e.stopPropagation();
         } else {
-            //TODO: just request and notes as param in push()
-            dispatch(getNotesAction(user.id, folder.id)).then(() => {
-                if (location.pathname === "/" || location.pathname === "/home") {
-                    router.push(CONTENT)
-                }
-            })
+            dispatch({type: SET_FOLDER_ID, payload: {selectedId: folder.id}})
+            if (location.pathname === "/" || location.pathname === "/home") {
+                router.push(CONTENT)
+            }
         }
     }
 
@@ -57,7 +53,7 @@ const TreeElement = ({folder}) => {
 
     return (
         <span
-            className={folderId === folder.id ? "selected-node tree-folder-title" : "tree-folder-title"}
+            className={selectedId === folder.id ? "selected-node tree-folder-title" : "tree-folder-title"}
             onClick={handleFolderClick}
         >
             {folder.title}

@@ -1,26 +1,24 @@
 import React, {useState} from 'react';
 import {Button, Col, Row, Tag} from "antd";
 import {PlusSquareOutlined} from "@ant-design/icons";
+import './NoteFilters.scss'
 
 const NoteFilters = ({tags}) => {
 
-    const { CheckableTag } = Tag;
-    const tagsData = tags;
-
-    const [selectedTags, setSelectedTags] = useState(['#go'])
+    const {CheckableTag} = Tag;
+    const [selectedTags, setSelectedTags] = useState([])
 
     const handleChange = (tag, checked) => {
-        const nextSelectedTags = checked ? [...selectedTags, tag] : selectedTags.filter(t => t !== tag);
-        console.log('You are interested in: ', nextSelectedTags);
-        setSelectedTags(nextSelectedTags);
+        const newSelectedTags = checked
+            ? [...selectedTags, tag]
+            : selectedTags.filter(t => t !== tag);
+        setSelectedTags(newSelectedTags);
     }
 
-    // console.log("Render NoteFilters")
-
     return (
-        <Row style={{marginBottom: "20px", width: "100%", display: "flex", justifyContent: "start", alignItems: "center"}}>
+        <Row className="filters-wrapper">
             <Col span={11}>
-                {tagsData.map(tag => (
+                {tags.map(tag => (
                     <CheckableTag
                         key={tag}
                         checked={selectedTags.indexOf(tag) > -1 }
@@ -30,11 +28,11 @@ const NoteFilters = ({tags}) => {
                     </CheckableTag>
                 ))}
             </Col>
-            <Col span={2} style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                <div style={{width: "30px"}}>
-                    {/*//TODO: add hove*/}
+            <Col span={2} className="add-note-container">
+                <div className="add-note-wrapper">
+                    {/*//TODO: add hover*/}
                     <Button
-                        icon={<PlusSquareOutlined style={{color: "rgba(44, 146, 239, 0.75)", fontSize: "30px"}} />}
+                        icon={<PlusSquareOutlined className="add-note-icon" />}
                         type={"text"}
                         // onClick={handleAddFolder}
                         // className="add-folder"

@@ -6,15 +6,10 @@ export const GET_FOLDERS = "GET_FOLDERS";
 export const CREATE_FOLDER = "CREATE_FOLDER";
 export const DELETE_FOLDER = "DELETE_FOLDER";
 
-export const GET_FOLDER_NOTES = "GET_NOTES";
+export const SET_FOLDER_ID = "SET_FOLDER_ID";
 export const REMOVE_FOLDER_ID = "REMOVE_FOLDER_ID";
-export const CREATE_NOTE = "CREATE_NOTE";
-export const EDIT_NOTE = "EDIT_NOTE";
-export const DELETE_NOTE = "DELETE_NOTE";
 
 export const OPEN_MODAL = "OPEN_MODAL";
 export const CLOSE_MODAL = "CLOSE_MODAL";
 
 export const SET_MESSAGE = "SET_MESSAGE"
-
-//TODO: state to save tree state after modals closes

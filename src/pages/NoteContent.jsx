@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {getFoldersAction} from "../redux/actions/folders";
 import {Col, Divider, Layout, Row} from "antd";
@@ -7,27 +7,30 @@ import NoteList from "../components/notes/NoteList/NoteList";
 import {Content} from "antd/es/layout/layout";
 import {useHistory, useLocation} from "react-router-dom";
 import {HOME} from "../routes/routes";
+import NoteService from "../services/NoteService";
 
 const NoteContent = () => {
 
     const dispatch = useDispatch();
     const {user} = useSelector(state => state.auth)
-    const {folders} = useSelector(state => state.folders)
-    //TODO: rm notes state, pass notes as param when navigate and put it to state
-    const {notes, folderId} = useSelector(state => state.notes)
+    const {folders, selectedId} = useSelector(state => state.folders)
     const location = useLocation()
     const router = useHistory()
+    const [notes, setNotes] = useState([])
 
-    //TODO: set notes as deps
-    useEffect(() => {
-        dispatch(getFoldersAction(user.id))
-    }, [user.id])
-
-    if (notes.length === 0 && !folderId && location.pathname === "/notes") {
+    if (!selectedId && location.pathname === "/notes") {
         router.push(HOME)
     }
 
-    console.log("Render NoteContent")
+    useEffect(() => {
+        NoteService.getFolderNotes(user.id, selectedId).then((data) => {
+            setNotes(data);
+        })
+    }, [selectedId])
+
+    useEffect(() => {
+        dispatch(getFoldersAction(user.id))
+    }, [notes])
 
     return (
         <Layout style={{backgroundColor: "white", padding: "0"}}>
@@ -42,7 +45,7 @@ const NoteContent = () => {
                     </Col>
                     <Col span={19} style={{paddingRight: "50px"}}>
                         <Row justify="center" style={{width: "100%", margin: "25px 0"}}>
-                            <NoteList notes={notes} tags={folders.filter(folder => folder.id === folderId).flatMap(folder => folder.tags).flatMap(tag => tag.title)} />
+                            <NoteList notes={notes} tags={folders.filter(folder => folder.id === selectedId).filter(folder => folder.tags).flatMap(folder => folder.tags).flatMap(tag => tag.title)} />
                         </Row>
                     </Col>
                 </Row>

@@ -9,7 +9,7 @@ import './FolderTree.scss'
 const FolderTree = ({folders}) => {
 
     const [isAddModalVisible, setIsAddModalVisible] = useState(false);
-    const {folderId} = useSelector(state => state.notes)
+    const {selectedId} = useSelector(state => state.folders)
 
     const handleAddFolder = () => {
         setIsAddModalVisible(true);
@@ -24,13 +24,13 @@ const FolderTree = ({folders}) => {
         return data.map(folder => {
             if (folder.subFolders.length) {
                 return ({
-                    className: folderId === folder.id ? "ant-tree-treenode-selected" : "",
+                    className: selectedId === folder.id ? "ant-tree-treenode-selected" : "",
                     key: folder.id,
                     title: <TreeElement folder={folder} />,
                     children: renderTreeNodes(folder.subFolders)})
             }
             return ({
-                className: folderId === folder.id ? "ant-tree-treenode-selected" : "",
+                className: selectedId === folder.id ? "ant-tree-treenode-selected" : "",
                 key: folder.id,
                 title: <TreeElement folder={folder} />,
                 children: []})

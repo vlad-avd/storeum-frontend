@@ -1,6 +1,6 @@
-import {CREATE_FOLDER, DELETE_FOLDER, GET_FOLDERS} from "../actions/types";
+import {CREATE_FOLDER, DELETE_FOLDER, GET_FOLDERS, REMOVE_FOLDER_ID, SET_FOLDER_ID} from "../actions/types";
 
-const initialState = {folders: []};
+const initialState = {folders: [], selectedId: null};
 
 export default function (state = initialState, action) {
     const { type, payload } = action;
@@ -12,6 +12,10 @@ export default function (state = initialState, action) {
             return {...state, folders: addFolder(state.folders, payload.parentFolderId, payload.newFolder)};
         case DELETE_FOLDER:
             return {...state, folders: deleteFolder(state.folders, payload.folderId)};
+        case SET_FOLDER_ID:
+            return {...state, selectedId: payload.selectedId}
+        case REMOVE_FOLDER_ID:
+            return {...state, selectedId: null}
         default:
             return state;
     }

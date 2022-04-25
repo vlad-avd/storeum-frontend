@@ -15,7 +15,7 @@ const Home = () => {
 
     useEffect(() => {
         dispatch({type: REMOVE_FOLDER_ID})
-    })
+    }, [user.id])
 
     useEffect(() => {
         dispatch(getFoldersAction(user.id))
