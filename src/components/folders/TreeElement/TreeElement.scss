@@ -1,11 +1,24 @@
-.hide {
+.folder-options-button {
     display: none;
+    float: right;
+    text-shadow: none;
+    vertical-align: middle;
+    border: none;
 }
 
-.hide:hover{
+.folder-options-button:hover{
     background-color: rgba(236, 236, 236, 0.6);
 }
 
-.title:hover .hide {
+.tree-folder-title:hover .folder-options-button {
+    display: block;
+}
+
+.folder-options-icon {
+    vertical-align: middle;
+}
+
+.tree-folder-title {
+    background-color: rgba(196, 196, 196, 0);
     display: block;
 }

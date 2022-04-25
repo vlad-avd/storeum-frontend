@@ -13,10 +13,12 @@ const NoteContent = () => {
     const dispatch = useDispatch();
     const {user} = useSelector(state => state.auth)
     const {folders} = useSelector(state => state.folders)
+    //TODO: rm notes state, pass notes as param when navigate and put it to state
     const {notes, folderId} = useSelector(state => state.notes)
     const location = useLocation()
     const router = useHistory()
 
+    //TODO: set notes as deps
     useEffect(() => {
         dispatch(getFoldersAction(user.id))
     }, [user.id])

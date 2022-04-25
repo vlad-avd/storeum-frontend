@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CreateNoteForm = () => {
+const CreateNoteModal = () => {
 
     // console.log("Render CreateNoteForm")
 
@@ -11,4 +11,4 @@ const CreateNoteForm = () => {
     );
 };
 
-export default CreateNoteForm;
+export default CreateNoteModal;

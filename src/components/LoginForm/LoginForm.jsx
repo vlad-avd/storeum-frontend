@@ -4,7 +4,6 @@ import "antd/dist/antd.css";
 import {Button, Col, Divider, Form, Input} from "antd";
 import {loginAction} from "../../redux/actions/auth";
 import Title from "antd/es/typography/Title";
-import "./LoginForm.scss"
 import {GoogleOutlined} from "@ant-design/icons";
 
 const LoginForm = () => {
@@ -65,8 +64,9 @@ const LoginForm = () => {
                 </Form.Item>
             </Form>
 
-            <Divider plain>or</Divider>
+            <Divider plain> or </Divider>
 
+            {/*TODO:*/}
             <a href="http://localhost:8080/api/v1/oauth2/authorize/google?redirect_uri==http://localhost:8080">
                 <Button
                     block

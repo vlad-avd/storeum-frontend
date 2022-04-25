@@ -26,20 +26,17 @@ const Navbar = () => {
         <Layout.Header className="header-background" >
             <Row>
                 <Col span={12}>
-                    <Button
-                        onClick={handleLogoClick}
-                        type="link"
-                        className="nav-button"
-                    >
+                    <Button onClick={handleLogoClick} type="link" className="nav-button">
                         <b>storeum</b>
                     </Button>
                 </Col>
 
-                {user
-                    ? <ProfileDropdown user={user}/>
-                    : <AnonymousMenu/>
-                }
-
+                <Col span={12}>
+                    {user
+                        ? <ProfileDropdown user={user}/>
+                        : <AnonymousMenu/>
+                    }
+                </Col>
             </Row>
         </Layout.Header>
     );

@@ -7,7 +7,7 @@ import Title from "antd/es/typography/Title";
 import {GoogleOutlined} from "@ant-design/icons";
 import {useHistory} from "react-router-dom";
 import {ERROR, MESSAGE} from "../../routes/routes";
-import  styles from "./RegistrationForm.module.scss"
+import "./RegistrationForm.scss";
 import {setMessageAction} from "../../redux/actions/messages";
 
 const Register = () => {
@@ -55,7 +55,7 @@ const Register = () => {
     return (
         <Col>
             <Form onFinish={handleRegister}>
-                <Title className={styles.formTitle}>
+                <Title className="form-title">
                     Create account
                 </Title>
 
@@ -63,7 +63,7 @@ const Register = () => {
                     <Input
                         onChange={onChangeFirstName}
                         placeholder="First Name *"
-                        className={styles.inputField}
+                        className="input-field"
                     />
                 </Form.Item>
 
@@ -71,7 +71,7 @@ const Register = () => {
                     <Input
                         onChange={onChangeEmail}
                         placeholder="Email *"
-                        className={styles.inputField}
+                        className="input-field"
                     />
                 </Form.Item>
 

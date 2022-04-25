@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {Button} from "antd";
-import '../../../styles/antd-override.scss'
-import FolderInputModal from "../AddFolderModal/FolderInputModal";
+import FolderInputModal from "../FolderInputModal/FolderInputModal";
 import DeleteFolderModal from "../DeleteFolderModal/DeleteFolderModal";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {CLOSE_MODAL, OPEN_MODAL} from "../../../redux/actions/types";
+import './FolderOptions.scss'
 
 const FolderOptions = ({folder, handleCloseOptions}) => {
 
@@ -13,19 +13,25 @@ const FolderOptions = ({folder, handleCloseOptions}) => {
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
     const dispatch = useDispatch();
 
-    const addFolder = () => {
+    const openAddModal = (e) => {
+        e.stopPropagation();
         handleCloseOptions();
         setIsAddModalVisible(true);
+        dispatch({type: OPEN_MODAL});
     }
 
-    const deleteFolder = () => {
+    const openDeleteFolder = (e) => {
+        e.stopPropagation();
         handleCloseOptions();
         setIsDeleteModalVisible(true);
+        dispatch({type: OPEN_MODAL});
     }
 
-    const renameFolder = () => {
+    const openRenameFolder = (e) => {
+        e.stopPropagation();
         handleCloseOptions();
         setIsRenameModalVisible(true);
+        dispatch({type: OPEN_MODAL});
     }
 
     // const closeAddFolderModalWithParent = async () => {
@@ -50,17 +56,15 @@ const FolderOptions = ({folder, handleCloseOptions}) => {
         dispatch({type: CLOSE_MODAL});
     }
 
-    // console.log("Render FolderActionsModal")
-
     return (
-        <div style={{display: "flex", alignItems: "start", flexDirection: "column"}}>
+        <div className="folder-options-wrapper">
             <FolderInputModal
                 isVisible={isAddModalVisible}
                 handleClose={closeAddModal}
                 parentFolderId={folder.id}
                 title="Create Folder"
             />
-            <Button onClick={addFolder} size="small" type="link">Add Folder</Button>
+            <Button onClick={openAddModal} size="small" type="link">Add Folder</Button>
 
             <FolderInputModal
                 isVisible={isRenameModalVisible}
@@ -68,14 +72,14 @@ const FolderOptions = ({folder, handleCloseOptions}) => {
                 parentFolderId={folder.id}
                 title="Rename Folder"
             />
-            <Button onClick={renameFolder} size="small" type="link">Rename</Button>
+            <Button onClick={openRenameFolder} size="small" type="link">Rename</Button>
 
             <DeleteFolderModal
                 isVisible={isDeleteModalVisible}
                 handleClose={closeDelModal}
                 folderId={folder.id}
             />
-            <Button onClick={deleteFolder} size="small" type="link">Delete</Button>
+            <Button onClick={openDeleteFolder} size="small" type="link">Delete</Button>
         </div>
     );
 };

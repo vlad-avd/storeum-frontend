@@ -1,14 +1,13 @@
 import React, {useState} from 'react';
 import {EllipsisOutlined} from "@ant-design/icons";
 import {Button, Popover} from "antd";
-import './TreeElement.css'
-import '../../../styles/antd-override.scss'
+import './TreeElement.scss'
 import FolderOptions from "../FolderActionsModal/FolderOptions";
 import {useDispatch, useSelector} from "react-redux";
 import {getNotesAction} from "../../../redux/actions/notes";
 import {useHistory, useLocation} from "react-router-dom";
 import {CONTENT} from "../../../routes/routes";
-import {CLOSE_MODAL, OPEN_MODAL} from "../../../redux/actions/types";
+import {CLOSE_MODAL} from "../../../redux/actions/types";
 
 const TreeElement = ({folder}) => {
 
@@ -23,7 +22,6 @@ const TreeElement = ({folder}) => {
     const handleOpenActions = (e) => {
         e.stopPropagation()
         setIsOptionsVisible(true)
-        dispatch({type: OPEN_MODAL});
     }
 
     const handleVisibleChange = (visible) => {
@@ -41,6 +39,7 @@ const TreeElement = ({folder}) => {
         if (isOpened) {
             e.stopPropagation();
         } else {
+            //TODO: just request and notes as param in push()
             dispatch(getNotesAction(user.id, folder.id)).then(() => {
                 if (location.pathname === "/" || location.pathname === "/home") {
                     router.push(CONTENT)
@@ -49,9 +48,7 @@ const TreeElement = ({folder}) => {
         }
     }
 
-    // console.log("Render TreeElement")
-
-    const content = (
+    const folderOptions = (
         <FolderOptions
             handleCloseOptions={() => setIsOptionsVisible(false)}
             folder={folder}
@@ -60,21 +57,26 @@ const TreeElement = ({folder}) => {
 
     return (
         <span
-            className={folderId === folder.id ? "selected-node title" : "title"}
+            className={folderId === folder.id ? "selected-node tree-folder-title" : "tree-folder-title"}
             onClick={handleFolderClick}
-            style={{display: "block", /*paddingLeft: "20px"*/}}
         >
             {folder.title}
-            <Popover onVisibleChange={handleVisibleChange} visible={isOptionsVisible} placement="right" title={null} content={content} trigger="click">
+            <Popover
+                onVisibleChange={handleVisibleChange}
+                visible={isOptionsVisible}
+                placement="right"
+                title={null}
+                content={folderOptions}
+                trigger="click"
+            >
                 <Button
                     onClick={handleOpenActions}
-                    className="hide"
+                    className="folder-options-button"
                     block
                     type="text"
                     htmlType="submit"
                     size={"small"}
-                    style={{float: "right", textShadow: "none", verticalAlign: "middle", border: "none"}}
-                    icon={<EllipsisOutlined className={"folder-options"} rotate={90} style={{verticalAlign: "middle"}}/>}
+                    icon={<EllipsisOutlined className="folder-options-icon" rotate={90}/>}
                 />
             </Popover>
         </span>

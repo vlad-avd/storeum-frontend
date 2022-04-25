@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/App.css";
+import "./styles/App.scss";
 import AppRouter from "./components/AppRouter";
 import Navbar from "./components/Navbar/Navbar";
 import {Layout} from "antd";

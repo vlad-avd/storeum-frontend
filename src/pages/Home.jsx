@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Col, Divider, Layout, Row} from "antd";
-import '../styles/App.css'
+import '../styles/App.scss'
 import {Content} from "antd/es/layout/layout";
 import FolderTree from "../components/folders/FolderTree/FolderTree";
 import {getFoldersAction} from "../redux/actions/folders";

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Col, Dropdown, Menu, Row} from "antd";
+import {Dropdown, Menu, Row} from "antd";
 import {UserOutlined} from "@ant-design/icons";
 import {logoutAction} from "../../redux/actions/auth";
 import {useDispatch} from "react-redux";
@@ -28,12 +28,10 @@ const ProfileDropdown = ({user}) => {
     );
 
     return (
-        <Col span={12}>
-            <Row justify="end" style={{height: "100%"}} type="flex" align="middle">
-                <Dropdown.Button className={"user-button"} overlay={dropDownMenu} placement="bottomCenter" icon={<UserOutlined />}>
-                </Dropdown.Button>
-            </Row>
-        </Col>
+        <Row justify="end" className="profile-dropdown-row" type="flex" align="middle">
+            <Dropdown.Button overlay={dropDownMenu} placement="bottomCenter" icon={<UserOutlined />}>
+            </Dropdown.Button>
+        </Row>
     );
 };
 

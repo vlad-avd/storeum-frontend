@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {Button, Layout, Tree} from "antd";
 import TreeElement from "../TreeElement/TreeElement";
-import FolderInputModal from "../AddFolderModal/FolderInputModal";
+import FolderInputModal from "../FolderInputModal/FolderInputModal";
 import {DownOutlined, PlusOutlined} from "@ant-design/icons";
-import './FolderTree.css'
 import {useSelector} from "react-redux";
+import './FolderTree.scss'
 
 const FolderTree = ({folders}) => {
 

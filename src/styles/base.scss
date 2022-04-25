@@ -1,0 +1,26 @@
+@mixin base-input-field {
+  height: 50px;
+  width: 350px;
+  border-radius: 5px !important;
+  margin-bottom: 20px;
+}
+
+@mixin base-submit-button {
+  height: 50px;
+  width: 350px;
+  border-radius: 5px !important;
+  border: none;
+  background-color: rgba(25, 144, 255, 0.84) !important;
+}
+
+@mixin base-cancel-button {
+
+}
+
+@mixin base-modal {
+
+}
+
+$tree-hover-color
+$interactive-element-hover-color
+$blue-color

@@ -21,40 +21,6 @@
     background-color: rgba(25, 144, 255, 0.84) !important;
 }
 
-.google-button {
-    @include base;
-    border-color: #C4C4C4;
-    background-color: white;
-    color: black;
-    margin: 0 !important;
-
-    &:focus {
-        background-color: white;
-        border-color: #C4C4C4;
-        span {
-            color: black;
-        }
-    }
-
-    &:hover {
-        background-color: white;
-        span {
-            color: black;
-        }
-    }
-
-    &:not(:hover) {
-        span {
-            color: black;
-        }
-    }
-}
-
-.google-icon {
-    font-size: 16px;
-    color: black;
-}
-
 //antd override
 
 .ant-form-item {
