@@ -8,15 +8,15 @@ import {useSelector} from "react-redux";
 
 const FolderTree = ({folders}) => {
 
-    const [isAddFolderModalVisible, setIsAddFolderModalVisible] = useState(false);
+    const [isAddModalVisible, setIsAddModalVisible] = useState(false);
     const {folderId} = useSelector(state => state.notes)
 
     const handleAddFolder = () => {
-        setIsAddFolderModalVisible(true);
+        setIsAddModalVisible(true);
     }
 
-    const closeAddFolderModal = () => {
-        setIsAddFolderModalVisible(false)
+    const closeAddModal = () => {
+        setIsAddModalVisible(false)
     }
 
     const renderTreeNodes = (data) => {
@@ -24,10 +24,10 @@ const FolderTree = ({folders}) => {
         return data.map(folder => {
             if (folder.subFolders.length) {
                 return ({
-                        className: folderId === folder.id ? "ant-tree-treenode-selected" : "",
-                        key: folder.id,
-                        title: <TreeElement folder={folder} />,
-                        children: renderTreeNodes(folder.subFolders)})
+                    className: folderId === folder.id ? "ant-tree-treenode-selected" : "",
+                    key: folder.id,
+                    title: <TreeElement folder={folder} />,
+                    children: renderTreeNodes(folder.subFolders)})
             }
             return ({
                 className: folderId === folder.id ? "ant-tree-treenode-selected" : "",
@@ -37,29 +37,28 @@ const FolderTree = ({folders}) => {
         });
     }
 
-    console.log("Render FolderTree")
+    // console.log("Render FolderTree")
 
     return (
         <Layout>
             <Tree
-                switcherIcon={<DownOutlined style={{marginRight: "10px"}} />}
+                switcherIcon={<DownOutlined className="tree-switcher-icon" />}
                 treeData={renderTreeNodes(folders)}
             />
             <FolderInputModal
-                isVisible={isAddFolderModalVisible}
-                handleClose={closeAddFolderModal}
+                isVisible={isAddModalVisible}
+                handleClose={closeAddModal}
                 title="Create Folder"
             />
             <Button
                 type={"text"}
-                /*TODO: add folder styles*/
                 onClick={handleAddFolder}
-                className="add-folder"
+                className="add-folder-button"
                 block
                 htmlType="submit"
                 size={"small"}
             >
-                    <PlusOutlined style={{color: "rgba(44, 146, 239, 0.75)", fontSize: "16px"}} />
+                <PlusOutlined className="add-folder-icon" />
                 Add folder
             </Button>
         </Layout>

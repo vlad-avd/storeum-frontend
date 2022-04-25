@@ -1,17 +1,26 @@
-.add-folder:focus {
+.add-folder-button:focus {
     background-color: white;
 }
 
-.add-folder:hover {
+.add-folder-button:hover {
     background-color: rgba(196, 196, 196, 0.3);
 }
 
-.add-folder {
+.add-folder-button {
     height: 100%;
     background-color: white;
     border-radius: 5px;
     padding: 4px 0;
     margin-top: 10px;
+}
+
+.add-folder-icon {
+    color: rgba(44, 146, 239, 0.75);
+    font-size: 16px;
+}
+
+.tree-switcher-icon {
+    margin-right: 10px;
 }
 
 /*.ant-btn.ant-btn-text.ant-btn-sm.ant-btn-block.add-folder {*/
