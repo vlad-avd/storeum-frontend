@@ -14,7 +14,7 @@ const Note = ({note}) => {
     }
 
     const tags = note.tags.map((tag) =>
-        <a className="tag-content" key={tag.id}> #{tag.title} </a>
+        <span className="tag-content" key={tag.id}> #{tag.title} </span>
     )
 
     const cardContent =

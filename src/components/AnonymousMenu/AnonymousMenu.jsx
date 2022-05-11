@@ -8,9 +8,8 @@ const AnonymousMenu = () => {
     const router = useHistory()
     const location = useLocation();
 
-    // console.log("Render AnonymousMenu")
-
     return (
+        //TODO: add locations list
         location.pathname === "/login"
             ? <Row justify="end" align="middle">
                 Don`t have a profile?

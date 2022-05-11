@@ -27,8 +27,6 @@ const LoginForm = () => {
         dispatch(loginAction(email, password))
     };
 
-    // console.log("Render LoginForm")
-
     return (
         <Col>
             <Form onFinish={handleLogin}>

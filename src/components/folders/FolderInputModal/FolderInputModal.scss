@@ -4,15 +4,13 @@
   border-radius: 5px !important;
 }
 
-.modal-form-title {
-  text-align: center;
-  font-size: 24px !important;
-  margin-bottom: 40px !important;
-}
-
-.input-folder-title {
+.input-folder-modal-title {
   @include base;
   margin-bottom: 20px;
+}
+
+.input-folder-modal-btns {
+  padding-bottom: 20px;
 }
 
 .save-btn {

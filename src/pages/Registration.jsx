@@ -4,8 +4,6 @@ import RegistrationForm from "../components/RegistrationForm/RegistrationForm";
 
 const Registration = () => {
 
-    console.log("Render Registration")
-
     return (
         <Row
             justify="center"

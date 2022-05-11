@@ -1,4 +1,11 @@
-import {CREATE_FOLDER, DELETE_FOLDER, GET_FOLDERS, REMOVE_FOLDER_ID, SET_FOLDER_ID} from "../actions/types";
+import {
+    CREATE_FOLDER,
+    DELETE_FOLDER,
+    EDIT_FOLDER,
+    GET_FOLDERS,
+    REMOVE_FOLDER_ID,
+    SET_FOLDER_ID
+} from "../actions/types";
 
 const initialState = {folders: [], selectedId: null};
 
@@ -10,6 +17,8 @@ export default function (state = initialState, action) {
             return {...state, folders: payload};
         case CREATE_FOLDER:
             return {...state, folders: addFolder(state.folders, payload.parentFolderId, payload.newFolder)};
+        case EDIT_FOLDER:
+            return {...state, folders: editFolder(state.folders, payload.folderId, payload.newFolder)}
         case DELETE_FOLDER:
             return {...state, folders: deleteFolder(state.folders, payload.folderId)};
         case SET_FOLDER_ID:
@@ -34,6 +43,19 @@ const addFolder = (folders, parentFolderId, newFolder) => {
             folder.subFolders.push(newFolder)
         }
         return folder;
+    })
+}
+
+const editFolder = (folders, folderId, newFolder) => {
+    return folders.map(folder => {
+        if (folder.subFolders) {
+            folder.subFolders = editFolder(folder.subFolders, folderId, newFolder)
+        }
+        if (folder.id === folderId) {
+            return newFolder;
+        } else {
+            return folder;
+        }
     })
 }
 

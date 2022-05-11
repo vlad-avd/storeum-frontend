@@ -1,29 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Button, Input, Modal, Row} from "antd";
-import {useDispatch, useSelector} from "react-redux";
-import {addFolderAction} from "../../../redux/actions/folders";
 import Title from "antd/es/typography/Title";
 import "./FolderInputModal.scss"
 
-const FolderInputModal = ({isVisible, handleClose, parentFolderId, title}) => {
-
-    const dispatch = useDispatch();
-    const [folderTitle, setFolderTitle] = useState("");
-    const {user} = useSelector(state => state.auth)
+const FolderInputModal = ({isVisible, handleClose, handleSubmit, setFolderTitle, title}) => {
 
     const onChangeFolderTitle = (e) => {
         const folderTitle = e.target.value;
         setFolderTitle(folderTitle);
-    }
-
-    const handleFolderCreation = () => {
-        dispatch(addFolderAction(user.id, parentFolderId, folderTitle))
-        // when creating root folder - there is no parent modal with options
-        // if (parentFolderId === undefined) {
-        handleClose()
-        // } else {
-        //     handleCloseWithParent();
-        // }
     }
 
     return (
@@ -47,10 +31,10 @@ const FolderInputModal = ({isVisible, handleClose, parentFolderId, title}) => {
                 <Input
                     onChange={onChangeFolderTitle}
                     placeholder="Title *"
-                    className="input-folder-title"
+                    className="input-folder-modal-title"
                 />
             </Row>
-            <Row type="flex" align="middle" justify="center" style={{paddingBottom: "20px"}}>
+            <Row type="flex" align="middle" justify="center" className="input-folder-modal-btns">
                 <Button
                     onClick={handleClose}
                     block
@@ -61,7 +45,7 @@ const FolderInputModal = ({isVisible, handleClose, parentFolderId, title}) => {
                     Cancel
                 </Button>
                 <Button
-                    onClick={handleFolderCreation}
+                    onClick={handleSubmit}
                     block
                     type="primary"
                     htmlType="submit"

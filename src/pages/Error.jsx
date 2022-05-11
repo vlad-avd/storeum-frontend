@@ -1,14 +1,12 @@
 import React from 'react';
-import {Button, Col, Layout, Row} from "antd";
-import {LOGIN, REGISTER} from "../routes/routes";
+import {Button, Col, Row} from "antd";
+import {LOGIN} from "../routes/routes";
 import Title from "antd/es/typography/Title";
 import {useHistory} from "react-router-dom";
 
 const Error = () => {
 
     const router = useHistory()
-
-    console.log("Render Error")
 
     return (
         <div>

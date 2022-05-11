@@ -18,7 +18,7 @@ const NoteList = ({notes, tags}) => {
                 <NoteFilters tags={tags}/>
                 <Divider className="filters-bottom-divider" />
                 <Row gutter={[16, 16]} justify="start">
-                    {notes.map(note =><Note note={note} />)}
+                    {notes.map(note =><Note key={note.id} note={note} />)}
                 </Row>
             </>
             :

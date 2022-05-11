@@ -3,15 +3,19 @@ import {Button, Layout, Tree} from "antd";
 import TreeElement from "../TreeElement/TreeElement";
 import FolderInputModal from "../FolderInputModal/FolderInputModal";
 import {DownOutlined, PlusOutlined} from "@ant-design/icons";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import './FolderTree.scss'
+import {addFolderAction} from "../../../redux/actions/folders";
 
 const FolderTree = ({folders}) => {
 
     const [isAddModalVisible, setIsAddModalVisible] = useState(false);
+    const [folderTitle, setFolderTitle] = useState("");
     const {selectedId} = useSelector(state => state.folders)
+    const {user} = useSelector(state => state.auth)
+    const dispatch = useDispatch();
 
-    const handleAddFolder = () => {
+    const openAddModal = () => {
         setIsAddModalVisible(true);
     }
 
@@ -19,9 +23,15 @@ const FolderTree = ({folders}) => {
         setIsAddModalVisible(false)
     }
 
+    const handleAddFolder = () => {
+        dispatch(addFolderAction(user.id, null, folderTitle));
+        closeAddModal();
+    }
+
     const renderTreeNodes = (data) => {
         if(!data) return [];
-        return data.map(folder => {
+        return data.sort((a, b) => a.id - b.id).
+        map(folder => {
             if (folder.subFolders.length) {
                 return ({
                     className: selectedId === folder.id ? "ant-tree-treenode-selected" : "",
@@ -37,22 +47,23 @@ const FolderTree = ({folders}) => {
         });
     }
 
-    // console.log("Render FolderTree")
-
     return (
         <Layout>
             <Tree
                 switcherIcon={<DownOutlined className="tree-switcher-icon" />}
                 treeData={renderTreeNodes(folders)}
+                defaultExpandedKeys={[selectedId]}
             />
             <FolderInputModal
                 isVisible={isAddModalVisible}
                 handleClose={closeAddModal}
+                handleSubmit={handleAddFolder}
+                setFolderTitle={setFolderTitle}
                 title="Create Folder"
             />
             <Button
                 type={"text"}
-                onClick={handleAddFolder}
+                onClick={openAddModal}
                 className="add-folder-button"
                 block
                 htmlType="submit"

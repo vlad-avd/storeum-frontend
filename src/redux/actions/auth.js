@@ -16,7 +16,7 @@ export const loginAction = (email, password) => (dispatch) => {
         });
 };
 
-export const exchangeOAuthTokeAction = (token) => (dispatch) => {
+export const exchangeOAuthTokenAction = (token) => (dispatch) => {
     return AuthService.exchangeOAuthToken(token)
         .then((data) => {
             dispatch({type: LOGIN_SUCCESS, payload: { user: data }});

@@ -3,6 +3,7 @@ import {Dropdown, Menu, Row} from "antd";
 import {UserOutlined} from "@ant-design/icons";
 import {logoutAction} from "../../redux/actions/auth";
 import {useDispatch} from "react-redux";
+import './ProfileDropdown.scss'
 
 const ProfileDropdown = ({user}) => {
 
@@ -11,8 +12,6 @@ const ProfileDropdown = ({user}) => {
     const handleLogout = () => {
         dispatch(logoutAction(user.id))
     }
-
-    // console.log("Render ProfileDropdown")
 
     const dropDownMenu = (
         <Menu>
@@ -29,8 +28,11 @@ const ProfileDropdown = ({user}) => {
 
     return (
         <Row justify="end" className="profile-dropdown-row" type="flex" align="middle">
-            <Dropdown.Button overlay={dropDownMenu} placement="bottomCenter" icon={<UserOutlined />}>
-            </Dropdown.Button>
+            <Dropdown.Button
+                overlay={dropDownMenu}
+                placement="bottomCenter"
+                icon={<UserOutlined />}
+            />
         </Row>
     );
 };

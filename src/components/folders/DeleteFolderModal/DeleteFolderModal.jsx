@@ -1,8 +1,9 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {deleteFolderAction} from "../../../redux/actions/folders";
-import {Button, Input, Modal, Row} from "antd";
+import {Button, Modal, Row} from "antd";
 import Title from "antd/es/typography/Title";
+import './DeleteFolderModal.scss'
 
 const DeleteFolderModal = ({isVisible, handleClose, folderId}) => {
     const dispatch = useDispatch();
@@ -15,8 +16,6 @@ const DeleteFolderModal = ({isVisible, handleClose, folderId}) => {
         handleClose()
     }
 
-    // console.log("Render DeleteFolderModal")
-
     return (
         <Modal
             className={"add-folder-modal"}
@@ -27,15 +26,19 @@ const DeleteFolderModal = ({isVisible, handleClose, folderId}) => {
             destroyOnClose={true}
             footer={null}
         >
+
             <Row type="flex" align="middle" justify="center">
                 <Title className={"modal-form-title"}>
                     Sure you want to accept ?
                 </Title>
             </Row>
-            <Row type="flex" align="middle" style={{marginBottom: "30px"}}>
+
+            <Row type="flex" align="middle" className="del-folder-modal-msg">
                 Are you really want to delete folder? Will be deleted all nested folders and titles.
             </Row>
-            <Row type="flex" align="middle" justify="center" style={{paddingBottom: "20px"}}>
+
+            <Row type="flex" align="middle" justify="center" className="del-folder-modal-btns">
+
                 <Button
                     onClick={handleClose}
                     block
@@ -45,6 +48,7 @@ const DeleteFolderModal = ({isVisible, handleClose, folderId}) => {
                 >
                     Cancel
                 </Button>
+
                 <Button
                     onClick={handleFolderDelete}
                     block
@@ -54,7 +58,9 @@ const DeleteFolderModal = ({isVisible, handleClose, folderId}) => {
                 >
                     Confirm
                 </Button>
+
             </Row>
+
         </Modal>
     );
 };

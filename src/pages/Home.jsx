@@ -15,13 +15,13 @@ const Home = () => {
 
     useEffect(() => {
         dispatch({type: REMOVE_FOLDER_ID})
-    }, [user.id])
+    }, [user.id, dispatch])
 
     useEffect(() => {
         dispatch(getFoldersAction(user.id))
-    }, [user.id])
+    }, [user.id, dispatch])
 
-    console.log("Render Home")
+    console.log("render home")
 
     return (
         <Layout style={{backgroundColor: "white", padding: "0"}}>

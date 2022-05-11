@@ -4,8 +4,6 @@ import LoginForm from "../components/LoginForm/LoginForm";
 
 const Login = () => {
 
-    console.log("Render Login")
-
     return (
         <Row
             justify="center"

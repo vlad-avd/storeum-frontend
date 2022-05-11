@@ -23,14 +23,16 @@ const NoteContent = () => {
     }
 
     useEffect(() => {
-        NoteService.getFolderNotes(user.id, selectedId).then((data) => {
-            setNotes(data);
-        })
-    }, [selectedId])
+        if (selectedId) {
+            NoteService.getFolderNotes(user.id, selectedId).then((data) => {
+                setNotes(data);
+            })
+        }
+    }, [selectedId, user.id])
 
     useEffect(() => {
         dispatch(getFoldersAction(user.id))
-    }, [notes])
+    }, [notes, dispatch, user.id])
 
     return (
         <Layout style={{backgroundColor: "white", padding: "0"}}>

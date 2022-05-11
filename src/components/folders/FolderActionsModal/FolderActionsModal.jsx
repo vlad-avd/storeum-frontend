@@ -2,15 +2,18 @@ import React, {useState} from 'react';
 import {Button} from "antd";
 import FolderInputModal from "../FolderInputModal/FolderInputModal";
 import DeleteFolderModal from "../DeleteFolderModal/DeleteFolderModal";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {CLOSE_MODAL, OPEN_MODAL} from "../../../redux/actions/types";
-import './FolderOptions.scss'
+import './FolderActionsModal.scss'
+import {addFolderAction, editFolderAction} from "../../../redux/actions/folders";
 
-const FolderOptions = ({folder, handleCloseOptions}) => {
+const FolderActionsModal = ({folder, handleCloseOptions}) => {
 
     const [isAddModalVisible, setIsAddModalVisible] = useState(false);
     const [isRenameModalVisible, setIsRenameModalVisible] = useState(false);
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+    const [folderTitle, setFolderTitle] = useState("");
+    const {user} = useSelector(state => state.auth)
     const dispatch = useDispatch();
 
     const openAddModal = (e) => {
@@ -56,11 +59,24 @@ const FolderOptions = ({folder, handleCloseOptions}) => {
         dispatch({type: CLOSE_MODAL});
     }
 
+    const handleAddFolder = () => {
+        dispatch(addFolderAction(user.id, folder.id, folderTitle));
+        closeAddModal();
+    }
+
+    const handleEditFolder = () => {
+        dispatch(editFolderAction(user.id, folder.parentFolder.id, folder.id, folderTitle))
+        closeRenameModal();
+    }
+
     return (
         <div className="folder-options-wrapper">
+
             <FolderInputModal
                 isVisible={isAddModalVisible}
                 handleClose={closeAddModal}
+                handleSubmit={handleAddFolder}
+                setFolderTitle={setFolderTitle}
                 parentFolderId={folder.id}
                 title="Create Folder"
             />
@@ -69,6 +85,8 @@ const FolderOptions = ({folder, handleCloseOptions}) => {
             <FolderInputModal
                 isVisible={isRenameModalVisible}
                 handleClose={closeRenameModal}
+                handleSubmit={handleEditFolder}
+                setFolderTitle={setFolderTitle}
                 parentFolderId={folder.id}
                 title="Rename Folder"
             />
@@ -84,4 +102,4 @@ const FolderOptions = ({folder, handleCloseOptions}) => {
     );
 };
 
-export default FolderOptions;
+export default FolderActionsModal;

@@ -4,6 +4,7 @@ export const LOGOUT = "LOGOUT";
 
 export const GET_FOLDERS = "GET_FOLDERS";
 export const CREATE_FOLDER = "CREATE_FOLDER";
+export const EDIT_FOLDER = "EDIT_FOLDER";
 export const DELETE_FOLDER = "DELETE_FOLDER";
 
 export const SET_FOLDER_ID = "SET_FOLDER_ID";
