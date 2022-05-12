@@ -9,6 +9,7 @@ export const DELETE_FOLDER = "DELETE_FOLDER";
 
 export const SET_FOLDER_ID = "SET_FOLDER_ID";
 export const REMOVE_FOLDER_ID = "REMOVE_FOLDER_ID";
+export const SET_EXPANDED_IDS = "SET_EXPANDED_IDS";
 
 export const OPEN_MODAL = "OPEN_MODAL";
 export const CLOSE_MODAL = "CLOSE_MODAL";

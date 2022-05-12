@@ -6,12 +6,13 @@ import {DownOutlined, PlusOutlined} from "@ant-design/icons";
 import {useDispatch, useSelector} from "react-redux";
 import './FolderTree.scss'
 import {addFolderAction} from "../../../redux/actions/folders";
+import {SET_EXPANDED_IDS} from "../../../redux/actions/types";
 
 const FolderTree = ({folders}) => {
 
     const [isAddModalVisible, setIsAddModalVisible] = useState(false);
     const [folderTitle, setFolderTitle] = useState("");
-    const {selectedId} = useSelector(state => state.folders)
+    const {selectedId, expandedIds} = useSelector(state => state.folders)
     const {user} = useSelector(state => state.auth)
     const dispatch = useDispatch();
 
@@ -26,6 +27,10 @@ const FolderTree = ({folders}) => {
     const handleAddFolder = () => {
         dispatch(addFolderAction(user.id, null, folderTitle));
         closeAddModal();
+    }
+
+    const onExpand = (keys) => {
+        dispatch({type: SET_EXPANDED_IDS, payload: {expandedIds: keys}})
     }
 
     const renderTreeNodes = (data) => {
@@ -52,7 +57,9 @@ const FolderTree = ({folders}) => {
             <Tree
                 switcherIcon={<DownOutlined className="tree-switcher-icon" />}
                 treeData={renderTreeNodes(folders)}
-                defaultExpandedKeys={[selectedId]}
+                selectedKeys={[selectedId]}
+                expandedKeys={expandedIds}
+                onExpand={onExpand}
             />
             <FolderInputModal
                 isVisible={isAddModalVisible}

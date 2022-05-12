@@ -65,7 +65,10 @@ const FolderActionsModal = ({folder, handleCloseOptions}) => {
     }
 
     const handleEditFolder = () => {
-        dispatch(editFolderAction(user.id, folder.parentFolder.id, folder.id, folderTitle))
+        const parentFolderId = folder.parentFolder
+            ? folder.parentFolder.id
+            : null;
+        dispatch(editFolderAction(user.id, parentFolderId, folder.id, folderTitle))
         closeRenameModal();
     }
 

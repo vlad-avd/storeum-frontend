@@ -4,10 +4,11 @@ import {
     EDIT_FOLDER,
     GET_FOLDERS,
     REMOVE_FOLDER_ID,
+    SET_EXPANDED_IDS,
     SET_FOLDER_ID
 } from "../actions/types";
 
-const initialState = {folders: [], selectedId: null};
+const initialState = {folders: [], selectedId: null, expandedIds: []};
 
 export default function (state = initialState, action) {
     const { type, payload } = action;
@@ -25,6 +26,8 @@ export default function (state = initialState, action) {
             return {...state, selectedId: payload.selectedId}
         case REMOVE_FOLDER_ID:
             return {...state, selectedId: null}
+        case SET_EXPANDED_IDS:
+            return {...state, expandedIds: payload.expandedIds}
         default:
             return state;
     }
