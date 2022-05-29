@@ -35,8 +35,7 @@ const FolderTree = ({folders}) => {
 
     const renderTreeNodes = (data) => {
         if(!data) return [];
-        return data.sort((a, b) => a.id - b.id).
-        map(folder => {
+        return data.sort((a, b) => a.id - b.id).map(folder => {
             if (folder.subFolders.length) {
                 return ({
                     className: selectedId === folder.id ? "ant-tree-treenode-selected" : "",

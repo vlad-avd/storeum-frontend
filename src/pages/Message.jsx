@@ -1,8 +1,8 @@
 import React from 'react';
-import {Button, Col, Layout, Row} from "antd";
+import {Button, Col, Row} from "antd";
 import {useSelector} from "react-redux";
 import Title from "antd/es/typography/Title";
-import {LOGIN, REGISTER} from "../routes/routes";
+import {LOGIN} from "../routes/routes";
 import {useHistory} from "react-router-dom";
 
 const Message = () => {
