@@ -1,0 +1,39 @@
+.editable-tag-wrapper {
+  margin-bottom: 20px;
+  padding-left: 15px;
+  width: 25vw;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.add-tag-element {
+  background: #fff;
+  border: none;
+  opacity: 60%;
+  cursor: pointer;
+}
+
+.tag-element {
+  user-select: none;
+  padding: 2px 5px 2px 5px;
+  border-radius: 5px;
+  border: none;
+  background-color: rgba(236, 236, 236, 0.6);
+}
+
+.ant-tag-close-icon {
+
+}
+
+.tag-input {
+  width: 78px;
+  margin-right: 8px;
+  vertical-align: top;
+  border-radius: 5px;
+}
+
+[data-theme="dark"] .add-tag-element {
+  background: transparent;
+  border-style: dashed;
+}

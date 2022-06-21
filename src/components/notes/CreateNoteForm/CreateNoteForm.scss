@@ -1,0 +1,7 @@
+@import "src/styles/base";
+
+.add-note-modal-input {
+  @include base-input-field;
+  width: 25vw;
+}
+

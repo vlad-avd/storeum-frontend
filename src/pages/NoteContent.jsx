@@ -14,6 +14,7 @@ const NoteContent = () => {
     const dispatch = useDispatch();
     const {user} = useSelector(state => state.auth)
     const {folders, selectedId} = useSelector(state => state.folders)
+    const {noteAction} = useSelector(state => state.notes)
     const location = useLocation()
     const router = useHistory()
     const [notes, setNotes] = useState([])
@@ -23,16 +24,24 @@ const NoteContent = () => {
     }
 
     useEffect(() => {
-        if (selectedId) {
+        if (selectedId && noteAction) {
             NoteService.getFolderNotes(user.id, selectedId).then((data) => {
                 setNotes(data);
             })
         }
-    }, [selectedId, user.id])
+    }, [selectedId, user.id, noteAction])
 
     useEffect(() => {
         dispatch(getFoldersAction(user.id))
-    }, [notes, dispatch, user.id])
+    }, [dispatch, user.id])
+
+    const getFolderTags = () => {
+        return folders
+            .filter(folder => folder.id === selectedId)
+            .filter(folder => folder.tags)
+            .flatMap(folder => folder.tags)
+            .flatMap(tag => tag.title)
+    }
 
     return (
         <Layout style={{backgroundColor: "white", padding: "0"}}>
@@ -47,7 +56,10 @@ const NoteContent = () => {
                     </Col>
                     <Col span={19} style={{paddingRight: "50px"}}>
                         <Row justify="center" style={{width: "100%", margin: "25px 0"}}>
-                            <NoteList notes={notes} tags={folders.filter(folder => folder.id === selectedId).filter(folder => folder.tags).flatMap(folder => folder.tags).flatMap(tag => tag.title)} />
+                            <NoteList
+                                notes={notes}
+                                tags={getFolderTags()}
+                            />
                         </Row>
                     </Col>
                 </Row>

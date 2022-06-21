@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, Col} from "antd";
+import {Card, Col, Tooltip} from "antd";
 import {EditOutlined, LinkOutlined} from "@ant-design/icons";
 import Meta from "antd/lib/card/Meta";
 import './Note.scss'
@@ -17,6 +17,16 @@ const Note = ({note}) => {
         <span className="tag-content" key={tag.id}> #{tag.title} </span>
     )
 
+    const truncate = (str, id) => {
+        return str.length > 18
+            ?
+            <Tooltip title={str} key={id}>
+                {str.substring(0, 15) + ' ...'}
+            </Tooltip>
+            :
+            str;
+    }
+
     const cardContent =
         <div>
             <div>
@@ -29,14 +39,14 @@ const Note = ({note}) => {
 
     const cardTitle = note.link
         ? <div>
-            {note.title}
+            {truncate(note.title, note.id)}
             <span className="card-buttons">
                 <LinkOutlined key="ellipsis" onClick={() => openInNewTab(note.link)}/>
                 <EditOutlined className="card-edit-second-button" key="options" />
             </span>
         </div>
         : <div>
-            {note.title}
+            {truncate(note.title, note.id)}
             <span className="card-buttons">
                 <EditOutlined key="options" />
             </span>

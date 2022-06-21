@@ -1,11 +1,23 @@
 import React from 'react';
+import {Modal} from "antd";
+import CreateNoteForm from "../CreateNoteForm/CreateNoteForm";
 
-const CreateNoteModal = () => {
+const CreateNoteModal = ({isVisible, handleClose}) => {
 
     return (
-        <div>
-
-        </div>
+        <Modal
+            className={"add-note-modal"}
+            width={"30vw"}
+            visible={isVisible}
+            closable={false}
+            onCancel={handleClose}
+            destroyOnClose={true}
+            footer={null}
+        >
+            <CreateNoteForm
+                handleClose={handleClose}
+            />
+        </Modal>
     );
 };
 

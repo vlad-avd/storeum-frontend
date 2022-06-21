@@ -11,17 +11,17 @@ const Home = () => {
 
     const dispatch = useDispatch();
     const {user} = useSelector(state => state.auth)
-    const {folders} = useSelector(state => state.folders)
+    const {folders, selectedId} = useSelector(state => state.folders)
 
     useEffect(() => {
-        dispatch({type: REMOVE_FOLDER_ID})
-    }, [user.id, dispatch])
+        if (selectedId) {
+            dispatch({type: REMOVE_FOLDER_ID})
+        }
+    }, [user.id, selectedId, dispatch])
 
     useEffect(() => {
         dispatch(getFoldersAction(user.id))
     }, [user.id, dispatch])
-
-    console.log("render home")
 
     return (
         <Layout style={{backgroundColor: "white", padding: "0"}}>
