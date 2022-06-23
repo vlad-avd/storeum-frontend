@@ -8,6 +8,7 @@ import {Content} from "antd/es/layout/layout";
 import {useHistory, useLocation} from "react-router-dom";
 import {HOME} from "../routes/routes";
 import NoteService from "../services/NoteService";
+import {setClearNoteAction} from "../redux/actions/notes";
 
 const NoteContent = () => {
 
@@ -24,7 +25,8 @@ const NoteContent = () => {
     }
 
     useEffect(() => {
-        if (selectedId && noteAction) {
+        if (selectedId || (selectedId && noteAction !== '')) {
+            dispatch(setClearNoteAction())
             NoteService.getFolderNotes(user.id, selectedId).then((data) => {
                 setNotes(data);
             })

@@ -15,12 +15,12 @@
 
 .save-btn {
   @include base;
-  width: 12vw;
+  width: 12vw !important;
 }
 
 .cancel-btn {
   @include base;
-  width: 12vw;
+  width: 12vw !important;
   margin-right: 1vw;
 }
 

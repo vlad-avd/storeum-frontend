@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
-import "antd/dist/antd.css";
 import {Button, Col, Divider, Form, Input} from "antd";
 import {loginAction} from "../../redux/actions/auth";
 import Title from "antd/es/typography/Title";
