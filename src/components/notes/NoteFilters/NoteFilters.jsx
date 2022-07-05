@@ -21,8 +21,6 @@ const NoteFilters = ({tags}) => {
         setSelectedTags(newSelectedTags);
     }
 
-    console.log(tags.sort((tag1, tag2) => tag1.localeCompare(tag2)))
-
     return (
         <Row className="filters-wrapper">
             <Col span={4} className="add-note-container">

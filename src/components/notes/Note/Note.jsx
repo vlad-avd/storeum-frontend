@@ -41,14 +41,15 @@ const Note = ({note}) => {
         ? <div>
             {truncate(note.title, note.id)}
             <span className="card-buttons">
-                <LinkOutlined key="ellipsis" onClick={() => openInNewTab(note.link)}/>
-                <EditOutlined className="card-edit-second-button" key="options" />
+                {/*TODO: add hover effect*/}
+                <LinkOutlined className="card-option-btn" key="ellipsis" onClick={() => openInNewTab(note.link)}/>
+                <EditOutlined className="card-edit-second-button card-option-btn" key="options" />
             </span>
         </div>
         : <div>
             {truncate(note.title, note.id)}
             <span className="card-buttons">
-                <EditOutlined key="options" />
+                <EditOutlined className="card-option-btn" key="options" />
             </span>
         </div>
 

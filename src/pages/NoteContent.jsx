@@ -9,41 +9,37 @@ import {useHistory, useLocation} from "react-router-dom";
 import {HOME} from "../routes/routes";
 import NoteService from "../services/NoteService";
 import {setClearNoteAction} from "../redux/actions/notes";
+import TagService from "../services/TagService";
 
 const NoteContent = () => {
 
     const dispatch = useDispatch();
     const {user} = useSelector(state => state.auth)
     const {folders, selectedId} = useSelector(state => state.folders)
-    const {noteAction} = useSelector(state => state.notes)
+    const notesState = useSelector(state => state.notes.update)
     const location = useLocation()
     const router = useHistory()
     const [notes, setNotes] = useState([])
+    const [tags, setTags] = useState([])
 
     if (!selectedId && location.pathname === "/notes") {
         router.push(HOME)
     }
 
     useEffect(() => {
-        if (selectedId || (selectedId && noteAction !== '')) {
+        if (selectedId) {
             dispatch(setClearNoteAction())
             NoteService.getFolderNotes(user.id, selectedId).then((data) => {
                 setNotes(data);
             })
         }
-    }, [selectedId, user.id, noteAction])
+    }, [selectedId, user.id])
 
     useEffect(() => {
-        dispatch(getFoldersAction(user.id))
-    }, [dispatch, user.id])
-
-    const getFolderTags = () => {
-        return folders
-            .filter(folder => folder.id === selectedId)
-            .filter(folder => folder.tags)
-            .flatMap(folder => folder.tags)
-            .flatMap(tag => tag.title)
-    }
+        TagService.getFolderTags(user.id, selectedId).then((data) => {
+            setTags(data.flatMap(tag => tag.title));
+        })
+    }, [dispatch, selectedId, user.id, notesState.value])
 
     return (
         <Layout style={{backgroundColor: "white", padding: "0"}}>
@@ -60,7 +56,7 @@ const NoteContent = () => {
                         <Row justify="center" style={{width: "100%", margin: "25px 0"}}>
                             <NoteList
                                 notes={notes}
-                                tags={getFolderTags()}
+                                tags={tags}
                             />
                         </Row>
                     </Col>
